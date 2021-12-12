@@ -1,0 +1,71 @@
+<!-- 
+    FreeWebKanban
+    Copyright © 2021 Anderson Bucchianico. All rights reserved.
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style.css"/>
+        <title>FreeWebKanban Prototype</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>
+                FreeWebKanban
+            </h1>
+            <nav>
+                <ul>
+                    <li>
+                        <button>Save</button>
+                    </li>
+                    <li>
+                        <button>Load</button>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="board-container">
+            <article class="board">
+                <!-- columns -->
+            </article>
+        </section>
+
+        <footer>
+            <div class="postit" draggable="true">
+                arraste para adicionar
+            </div>
+        </footer>
+    </body>
+
+    <template id="column">
+        <section class="column-item">
+            <h2 class="column-title" contenteditable="true"></h2>
+            <div class="column-subcontainer">
+                <!-- sticky notes -->
+            </div>
+        </section>
+    </template>
+
+    <template id="item-slot">
+        <ul class="list-item">
+        </ul>
+    </template>
+
+    <template id="item-sticky">
+        <li class="item">
+            <div class="postit" contenteditable="true">
+                teste
+            </div>
+        </li>
+    </template>
+
+    <script src="./script.js"></script>
+
+</html>

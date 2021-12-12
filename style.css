@@ -1,0 +1,126 @@
+/**
+ * FreeWebKanban
+ * Copyright © 2021 Anderson Bucchianico. All rights reserved.
+*/
+
+@font-face {
+    font-family: CraftyGirls;
+    src: url('./fonts/crafty-girls/CraftyGirls.ttf');
+}
+
+:root {
+    --sticky-color-yellow: #FEF4A1;
+    --sticky-color-red: #FEC8C8;
+    --sticky-color-green: green;
+    --sticky-color-blue: blue;
+    --sticky-color-purple: #b7c9fd;
+    --sticky-color-grey: grey;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    background: #f3f4f5;
+    height: 30px;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+ul {
+    display: flex;
+    column-gap: 10px;
+}
+button {
+    border: solid 2px green;
+    border-radius: 10px;
+    background: transparent;
+    color: #004800;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    padding: 3rem;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+}
+h2.column-title {
+    background: #f3f4f5;
+    min-width: 92px;
+    min-height: 20px;
+}
+
+.column-subcontainer {
+    padding: 5px;
+    row-gap: 10px;
+    display: grid;
+}
+
+section.board-container {
+    display: flex;
+    column-gap: 20px;
+    padding: 15px 2rem;
+    overflow: auto hidden;
+}
+article.board {
+    display: flex;
+    column-gap: 20px;
+}
+button.new-column {
+    border: none;
+    border-radius: 10px;
+    background: rgb(176, 226, 176);
+    color: #004800;
+    cursor: pointer;
+}
+section[class="column-item"] {
+    min-width: 200px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+ul.list-item {
+    min-height: 150px;
+    display: grid;
+
+}
+ul.list-slot {
+    border: dashed 1px grey;
+}
+
+li.item {
+    background: #fef4a1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+li.item > p {
+    text-align: center;
+    font-family: 'CraftyGirls';
+}
+
+.postit {
+    cursor: grab;
+    background-color: #fef4a1;
+    box-shadow: -3px 4px 5px 2px #797979;
+    transform: rotate(358deg);
+    width: 200px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: CraftyGirls, cursive;
+    font-size: 20px;
+}
