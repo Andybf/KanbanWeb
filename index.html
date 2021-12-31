@@ -19,50 +19,39 @@
             <h1>
                 FreeWebKanban
             </h1>
-            <nav>
-                <ul>
-                    <li>
-                        <button>Save</button>
-                    </li>
-                    <li>
-                        <button>Load</button>
-                    </li>
-                </ul>
-            </nav>
         </header>
 
         <section class="board-container">
-            <article class="board">
+            <h2 contenteditable="true">BoardTitle</h2>
+            <ul class="board">
                 <!-- columns -->
-            </article>
+            </ul>
         </section>
 
         <footer>
-            <div class="postit" draggable="true">
+            <div id="stickynote-stack" draggable="true">
                 arraste para adicionar
             </div>
         </footer>
     </body>
 
     <template id="column">
-        <section class="column-item">
-            <h2 class="column-title" contenteditable="true"></h2>
-            <div class="column-subcontainer">
-                <!-- sticky notes -->
-            </div>
-        </section>
+        <li class="column-list-slot">
+            <h3 contenteditable="true"></h3>
+            <ul class="column-stickynote-list">
+                <!-- sticky notes items -->
+            </ul>
+        </li>
     </template>
 
-    <template id="item-slot">
-        <ul class="list-item">
-        </ul>
+    <template id="stickynote">
+        <li class="stickynote-list">
+            <div class="item-stickynote" contenteditable="true">teste</div>
+        </li>
     </template>
 
-    <template id="item-sticky">
-        <li class="item">
-            <div class="postit" contenteditable="true">
-                teste
-            </div>
+    <template id="stickynote-slot">
+        <li class="stickynote-list-slot">
         </li>
     </template>
 
