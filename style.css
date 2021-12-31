@@ -11,10 +11,10 @@
 :root {
     --sticky-color-yellow: #FEF4A1;
     --sticky-color-red: #FEC8C8;
-    --sticky-color-green: green;
-    --sticky-color-blue: blue;
+    --sticky-color-green: #b3fea4;
+    --sticky-color-blue: #aef3f3;
     --sticky-color-purple: #b7c9fd;
-    --sticky-color-grey: grey;
+    --sticky-color-grey: #EEEEEE;
 }
 
 * {
@@ -45,9 +45,12 @@ button {
     user-select: none;
 }
 footer {
+    display: flex;
+    justify-content: space-between;
     position: fixed;
     bottom: 0;
     padding: 3rem;
+    width: calc(100% - 6rem);
 }
 
 h1 {
@@ -179,4 +182,17 @@ li.item > p {
 li.stickynote-list-slot {
     border: dashed 2px #08ce08;
     min-height: 128px;
+}
+
+section#recyclebin-container {
+    width: 200px;
+    height: 150px;
+    border: 5px dashed #4a4a4a;
+    display: flex;
+    justify-content: center;
+}
+
+section#recyclebin-container > img {
+    width: 80px;
+    pointer-events: none;
 }
