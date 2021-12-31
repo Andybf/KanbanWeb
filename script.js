@@ -1,6 +1,6 @@
 /**
  * FreeWebKanban
- * Copyright © 2021 Anderson Bucchianico. All rights reserved.
+ * FreeWebKanban © 2021 Anderson Bucchianico. All rights reserved.
 */
 
 let stickyNoteStack = document.querySelector("#stickynote-stack");
