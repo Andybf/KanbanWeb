@@ -15,53 +15,8 @@
     </head>
 
     <body>
-        <header>
-            <h1>
-                FreeWebKanban
-            </h1>
-        </header>
-
-        <section class="board-container">
-            <h2 contenteditable="true">BoardTitle</h2>
-            <ul class="board">
-                <!-- columns -->
-            </ul>
-        </section>
-
-        <footer>
-            <div id="stickynote-stack" draggable="true">
-                arraste para adicionar
-            </div>
-
-            <section id="recyclebin-container">
-                <img src="/images/recyclebin.svg"/>
-            </section>
-        </footer>
+        <comp-app></comp-app>
     </body>
-
-    <template id="column">
-        <li class="column-list-slot">
-            <h3 contenteditable="true"></h3>
-            <ul class="column-stickynote-list">
-                <!-- sticky notes items -->
-            </ul>
-        </li>
-    </template>
-
-    <template id="stickynote">
-        <li class="stickynote-list">
-            <div
-                class="item-stickynote"
-                contenteditable="true"
-                draggable="true"
-            >teste</div>
-        </li>
-    </template>
-
-    <template id="stickynote-slot">
-        <li class="stickynote-list-slot">
-        </li>
-    </template>
 
     <script src="./script.js"></script>
 

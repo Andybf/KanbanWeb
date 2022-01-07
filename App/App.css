@@ -1,0 +1,139 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    background: #ffffff;
+    height: 30px;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 2px 4px 0px #c1c1c1;
+}
+nav {
+    display: flex;
+    row-gap: 10px;
+    align-items: center;
+    justify-content: center;
+    min-width: 50%;
+}
+ul {
+    display: flex;
+    column-gap: 2rem;
+}
+button {
+    border: none;
+    border-radius: 5px;
+    background: #f5f5f5;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+    height: 30px;
+    min-width: 50px;
+    font-size: 11pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4c4c4c;
+    box-shadow: 2px 2px 4px #ababab;
+}
+button:disabled {
+    color: #cccccc;
+    pointer-events: none;
+}
+button:active {
+    box-shadow: 0px 0px 4px #ababab;
+}
+footer {
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0;
+    padding: 2rem;
+    width: calc(100% - 4rem);
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    font-weight: normal;
+    font-size: 16pt;
+    user-select: none;
+}
+h2 {
+    font-size: 14pt;
+    font-weight: normal;
+    color: #5f5f5f;
+    text-align: center;
+    min-width: 50px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+h2:hover {
+    border: dotted 1px black;
+}
+
+.options-container {
+    display: flex;
+    column-gap: 10px;
+}
+
+.column-subcontainer {
+    padding: 5px;
+    row-gap: 10px;
+    display: grid;
+}
+
+section.board-container {
+    display: flex;
+    column-gap: 20px;
+    padding: 1rem 2rem;
+    overflow: auto hidden;
+    flex-direction: column;
+    row-gap: 15px;
+}
+article.column-list {
+    display: flex;
+    column-gap: 20px;
+}
+button.new-column {
+    border: none;
+    border-radius: 10px;
+    background: rgb(176, 226, 176);
+    color: #004800;
+    cursor: pointer;
+}
+section[class="column-item"] {
+    min-width: 200px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+ul.list-item {
+    min-height: 150px;
+    display: grid;
+
+}
+ul.list-slot {
+    border: dashed 1px grey;
+}
+
+li.item {
+    background: #fef4a1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+li.item > p {
+    text-align: center;
+    font-family: 'CraftyGirls';
+}
+
+.stickynote-item {
+    min-height: 150px;
+}

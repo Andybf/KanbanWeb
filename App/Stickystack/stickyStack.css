@@ -1,0 +1,13 @@
+#stickynote-stack {
+    cursor: grab;
+    background-color: #fef4a1;
+    box-shadow: -3px 4px 5px 2px #797979;
+    transform: rotate(358deg);
+    width: 200px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-family: CraftyGirls, cursive;
+    font-size: 20px;
+}
