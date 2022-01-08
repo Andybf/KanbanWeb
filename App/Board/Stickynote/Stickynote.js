@@ -7,6 +7,7 @@ import AVElement from "/modules/AVElement.js";
 export default class Stickynote extends AVElement{
 
     boardReference;
+    stickyStackReference;
 
     connectedCallback() {
         this.boardReference = this.getParentComponents()[0];

@@ -22,6 +22,7 @@ export default class Recyclebin extends AVElement {
             this.getParentComponents()[0].getChildenComponents()[0].currentOnDragStickyNote = null;
             this.currentOnDragStickyNote = null;
         }
+        event.target.style['animation-name'] = null;
     }
 
     recyclebinDragEnter(event) {
@@ -29,6 +30,7 @@ export default class Recyclebin extends AVElement {
     }
 
     recyclebinDragLeave(event) {
+        console.log("recyclebinDragLeave", event);
         event.target.style['animation-name'] = null;
     }
 }

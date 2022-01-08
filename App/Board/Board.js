@@ -17,9 +17,12 @@ export default class Board extends AVElement {
     }
 
     dropOnStickynoteSlot(event) {
-        console.log('stickynoteDrop',event);
-        this.createNewStickernoteOnColumnList(event.target.parentElement);
-        if (this.currentOnDragStickyNote) {this.deleteOldCopiedStickernote();}
+        if (this.currentOnDragStickyNote) {
+            event.target.parentElement.appendChild(this.currentOnDragStickyNote.parentElement);
+            this.currentOnDragStickyNote = null;
+        } else {
+            this.createNewStickernoteOnColumnList(event.target.parentElement);
+        }
     }
 
     createNewStickernoteOnColumnList(target) {
@@ -72,20 +75,18 @@ export default class Board extends AVElement {
         event.target.ondragover = null;
         event.target.ondrop = null;
 
-        let stickerSlot = document.createElement("li");;
-        stickerSlot.className = "sticker-item";
-        event.target.lastElementChild.appendChild(stickerSlot);
-        this.createNewStickernoteOnColumnList(event.target.lastElementChild);
-        if (this.currentOnDragStickyNote) {this.deleteOldCopiedStickernote();}
-    }
-
-    deleteOldCopiedStickernote(){
-        this.currentOnDragStickyNote.parentElement.parentElement.removeChild(this.currentOnDragStickyNote.parentElement);
-        this.currentOnDragStickyNote = null;
+        if (this.currentOnDragStickyNote) {
+            event.target.lastElementChild.appendChild(this.currentOnDragStickyNote.parentElement);
+            this.currentOnDragStickyNote = null;
+        } else {
+            let stickerSlot = document.createElement("li");;
+            stickerSlot.className = "sticker-item";
+            event.target.lastElementChild.appendChild(stickerSlot);
+            this.createNewStickernoteOnColumnList(event.target.lastElementChild);
+        }
     }
 
     columnDrop(event) {
-        console.log('drop',event);
         this.convertColumnSlotToColumn(event);
     }
 }
