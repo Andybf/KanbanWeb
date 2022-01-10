@@ -4,21 +4,13 @@ comp-stickynote {
 }
 
 .stickynote-content {
-    cursor: grab;
-    box-shadow: -3px 4px 5px 2px #797979;
-    min-height:150px;
-    min-width: -webkit-fill-available;
-}
-
-.stickynote-content {
-    cursor: grab;
     box-shadow: -3px 4px 5px 2px #797979;
     width: 190px;
-    height: 140px;
+    height: 130px;
     display: flex;
     align-items: center;
     text-align: center;
-    font-family: CraftyGirls, cursive;
     font-size: 20px;
-    padding: 5px;
+    padding: 10px;
+    z-index: 100;
 }

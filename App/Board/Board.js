@@ -7,13 +7,16 @@ export default class Board extends AVElement {
 
     boardList;
     currentOnDragStickyNote;
+    stickyStackReference;
 
     connectedCallback() {
+        
     }
 
     renderedCallback() {
         this.boardList = this.body.querySelector("ul.column-list");
         this.loadNewChildrenComponent('comp-stickynote');
+        this.stickyStackReference = this.getParentComponents()[0].getChildrenComponents()[1];
     }
 
     dropOnStickynoteSlot(event) {
@@ -28,8 +31,11 @@ export default class Board extends AVElement {
     createNewStickernoteOnColumnList(target) {
         let compStickerNote = document.createElement("comp-stickynote");
         let listItem = target.lastElementChild;
-        listItem.classList.remove("slot");
+        this.deactivateStickerSlot(listItem);
         listItem.appendChild(compStickerNote);
+        this.stickyStackReference.body.querySelectorAll(".selected").forEach(element => {
+            compStickerNote.cardStyleInformation.set(element.dataset['attr'], element.dataset['value']);
+        });
     }
 
     insertStickynoteSlotsOnColumns() {
@@ -38,6 +44,7 @@ export default class Board extends AVElement {
             stickerSlot.className = "sticker-item slot";
             stickerSlot.ondragover = event => {event.preventDefault()};
             stickerSlot.ondrop = event => {this.dropOnStickynoteSlot(event)};
+            stickerSlot.ontouchend = event => {this.dropOnStickynoteSlot(event)};
             column.querySelector("ul").appendChild(stickerSlot);
         }
     }
@@ -70,10 +77,9 @@ export default class Board extends AVElement {
 
     convertColumnSlotToColumn(event) {
         let listItem = document.importNode(this.body.querySelector("template#column-content").content,true);
+        listItem.querySelector("#recycle-button").addEventListener('click', event => {this.deleteColumn(event)});
         event.target.appendChild(listItem);
-        event.target.classList.remove('slot');
-        event.target.ondragover = null;
-        event.target.ondrop = null;
+        this.deactivateStickerSlot(event.target);
 
         if (this.currentOnDragStickyNote) {
             event.target.lastElementChild.appendChild(this.currentOnDragStickyNote.parentElement);
@@ -88,5 +94,15 @@ export default class Board extends AVElement {
 
     columnDrop(event) {
         this.convertColumnSlotToColumn(event);
+    }
+
+    deactivateStickerSlot(slot) {
+        slot.classList.remove('slot');
+        slot.ondragover = null;
+        slot.ondrop = null;
+    }
+
+    deleteColumn(event) {
+        event.target.parentElement.parentElement.parentElement.removeChild(event.target.parentElement.parentElement)
     }
 }

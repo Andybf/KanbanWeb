@@ -74,7 +74,7 @@ h2:hover {
 }
 
 section.board-container {
-    padding: 1rem 2rem;
+    padding: 1rem 85px;
     overflow: auto;
 }
 
@@ -85,4 +85,6 @@ footer {
     width: calc(100% - 2rem);
     position: fixed;
     bottom: 0;
+    pointer-events: none;
+    z-index: 200;
 }

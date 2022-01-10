@@ -91,12 +91,15 @@ export default class AVElement extends HTMLElement {
         await this.#fetchContentWithPath(this.#componentpath.css).then( cssText => {
             let styleNode = document.createElement("style");
             styleNode.innerText = removeCommentsAndBreakLines(cssText);
-            let compStyle = new MiniParser().parseToJSON(this.localName, cssText);
-            compStyle &&
-            Object.keys(compStyle).forEach( (attr) => {
-                this.style[attr] = compStyle[attr]
-            }) 
+            this.#applyStylesToComponentRootElement(cssText);
             this.body.appendChild(styleNode);
+        });
+    }
+
+    #applyStylesToComponentRootElement(cssText) {
+        let compStyle = new MiniParser().parseToJSON(this.localName, cssText);
+        compStyle && Object.keys(compStyle).forEach( (attr) => {
+            this.style[attr] = compStyle[attr]
         });
     }
 
@@ -108,6 +111,7 @@ export default class AVElement extends HTMLElement {
     #doPostLoadContentActions() {
         this.#catalogChildrenComponents();
         this.#initializeAllChildrenComponents();
+        this.attributes.length > 0 && this.#loadParentCustomAttributes();
     }
 
     #catalogChildrenComponents() {
@@ -122,6 +126,15 @@ export default class AVElement extends HTMLElement {
         this.#childrenComponentList.forEach( componentNode => {
             this._initializeChildrenComponent(componentNode);
         })
+    }
+
+    #loadParentCustomAttributes() {
+        Array.from(this.attributes).forEach( attr => {
+            if (attr.nodeValue.includes('{') && attr.nodeValue.includes('}')) {
+                let varName = attr.nodeValue.replace('{','').replace('}','');
+                this[attr.name] = this.getParentComponents()[0][varName];
+            }
+        });
     }
 
     _initializeChildrenComponent(componentElement) {
@@ -142,7 +155,10 @@ export default class AVElement extends HTMLElement {
     }
 
     #defineCustomComponent(htmlNode,classDefinition) {
-        if (classDefinition.default) {
+        function isComponentAlreadyDefined(name) {
+            return window.customElements.get(name);
+        }
+        if (classDefinition.default && !isComponentAlreadyDefined(htmlNode.localName)) {
             customElements.define(htmlNode.localName,classDefinition.default);
         }
     }
@@ -151,7 +167,7 @@ export default class AVElement extends HTMLElement {
         return this._parentComponentNameList;
     }
 
-    getChildenComponents() {
+    getChildrenComponents() {
         return this.#childrenComponentList;
     }
 

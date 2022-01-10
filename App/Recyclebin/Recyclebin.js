@@ -16,10 +16,10 @@ export default class Recyclebin extends AVElement {
     }
 
     recyclebinDrop(event) {
-        this.currentOnDragStickyNote = this.getParentComponents()[0].getChildenComponents()[0].currentOnDragStickyNote
+        this.currentOnDragStickyNote = this.getParentComponents()[0].getChildrenComponents()[0].currentOnDragStickyNote
         if (this.currentOnDragStickyNote) {
             this.currentOnDragStickyNote.parentElement.parentElement.removeChild(this.currentOnDragStickyNote.parentElement);
-            this.getParentComponents()[0].getChildenComponents()[0].currentOnDragStickyNote = null;
+            this.getParentComponents()[0].getChildrenComponents()[0].currentOnDragStickyNote = null;
             this.currentOnDragStickyNote = null;
         }
         event.target.style['animation-name'] = null;
@@ -32,5 +32,13 @@ export default class Recyclebin extends AVElement {
     recyclebinDragLeave(event) {
         console.log("recyclebinDragLeave", event);
         event.target.style['animation-name'] = null;
+    }
+
+    activateRecycleBin() {
+        this.body.firstChild.style['display'] = 'flex';
+    }
+
+    deactivateRecycleBin() {
+        this.body.firstChild.style['display'] = null;
     }
 }

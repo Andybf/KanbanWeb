@@ -1,0 +1,64 @@
+.option-buttons {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    height: 150px;
+    width: 70px;
+    justify-content: center;
+    position: absolute;
+    z-index: 99;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 3px #a7a7a7;
+    opacity: 0;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.left-side {
+    transform: translateX(0px);
+}
+
+.right-side {
+    transform: translateX(-70px);
+}
+
+.option-buttons > button {
+    width: 32px;
+    height: 32px;
+    border: none;
+    margin: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.selected {
+    border: 3px solid #005aff;
+    border-radius: 3px;
+}
+
+button:hover {
+    border: 2px solid #005aff;
+    border-radius: 3px;
+}
+
+@keyframes slideToRight {
+    0% {transform: translateX(-70px); opacity: 0;}
+    100% {transform: translateX(10px); opacity: 1;}
+}
+@keyframes slideToLeft {
+    0% {transform: translateX(0px); opacity: 0;}
+    100% {transform: translateX(-80px); opacity: 1;}
+}
+
+@keyframes closeRight {
+    0% {transform: translateX(10px); opacity: 1;}
+    100% {transform: translateX(-70px); opacity: 0;}
+}
+@keyframes closeLeft {
+    0% {transform: translateX(-80px); opacity: 1;}
+    100% {transform: translateX(0px); opacity: 0;}
+} 

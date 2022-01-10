@@ -8,30 +8,46 @@ export default class Stickynote extends AVElement{
 
     boardReference;
     stickyStackReference;
+    recyclebinReference;
+    stickynote;
+    cardStyleInformation = new Map();
+    colorOptionsAvailable = [
+        'var(--sticky-color-yellow)',
+        'var(--sticky-color-red)',
+        'var(--sticky-color-green)',
+        'var(--sticky-color-blue)',
+        'var(--sticky-color-purple)',
+        'var(--sticky-color-grey)'
+    ];
+    fontOptionsAvailable = [
+        'cursive',
+        'fantasy',
+        'monospace',
+        'sans-serif',
+        'CraftyGirls',
+        'serif'
+    ];
 
     connectedCallback() {
         this.boardReference = this.getParentComponents()[0];
+        this.recyclebinReference = this.getParentComponents()[1].body.querySelector("comp-recyclebin");
     }
 
     renderedCallback() {
+        this.stickynote = this.body.querySelector('div');
         this.addEventListener('dragstart', event => {this.stickynoteDragStart(event)});
         this.addEventListener('dragend', event => {this.stickynoteDragEnd(event)});
+        this.onmouseup = event => {this.activateStickerOptions(event)}
+        this.onblur = event => {this.deactivateStickerOptions(event)}
         this.generateColorForSticker();
         this.generateRotationForSticker();
     }
 
     generateColorForSticker() {
-        let colorList = [
-            '--sticky-color-yellow',
-            '--sticky-color-red',
-            '--sticky-color-green',
-            '--sticky-color-blue',
-            '--sticky-color-purple',
-            '--sticky-color-grey'
-        ];
-        let generatedNumber = Math.round(Math.random() * 5);
-        let selectedColor = colorList[generatedNumber];
-        this.body.querySelector('div').style['background-color'] = `var(${selectedColor})`;
+        let stickerBody = this.body.querySelector('div');
+        this.cardStyleInformation.forEach( (value,key) => {
+            stickerBody.style[key] = value;
+        })
     }
 
     generateRotationForSticker() {
@@ -39,16 +55,37 @@ export default class Stickynote extends AVElement{
     }
 
     stickynoteDragStart(event) {
-        console.log('stickynoteDragStart',event);
-        
+        this.onblur = null;
+        this.recyclebinReference.activateRecycleBin();
         this.boardReference.currentOnDragStickyNote = event.target;
         this.boardReference.insertStickynoteSlotsOnColumns();
         this.boardReference.insertNewColumnSlotOnBoard();
     }
 
     stickynoteDragEnd(event) {
-        console.log('stickynoteDragEnd', event);
+        this.recyclebinReference.deactivateRecycleBin();
         this.boardReference.removeExistingColumnSlots();
         this.boardReference.removeExistingStickynoteSlots();
+        this.onblur = event => {this.deactivateStickerOptions(event)}
+    }
+
+    activateStickerOptions(event) {
+        setTimeout(() => {
+            for(let optComp of this.getChildrenComponents()) {
+                optComp.activateOptionPanel();
+            }
+        },250);
+        this.stickynote.style['z-index'] = '102';
+    }
+
+    deactivateStickerOptions(event) {
+        setTimeout(() => {
+            for(let optComp of this.getChildrenComponents()) {
+                optComp.deactivateOptionPanel();
+            }
+            setTimeout(() => {
+                this.stickynote.style['z-index'] = null;
+            },1000);
+        },250);
     }
 }

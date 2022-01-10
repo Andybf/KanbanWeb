@@ -11,25 +11,26 @@ section {
     box-shadow: 2px -5px 4px 3px #cccccc;
     border-radius: 0 10rem 0 0;
     padding: 10px;
+    pointer-events: all;
+    background: white;
 }
 
 .stickynote-stack {
     cursor: grab;
-    background-color: #fef4a1;
     box-shadow: -3px 4px 5px 2px #797979;
     transform: rotate(358deg);
-    width: 200px;
-    height: 150px;
+    width: 180px;
+    height: 130px;
     display: flex;
     align-items: center;
     text-align: center;
-    font-family: CraftyGirls, cursive;
     font-size: 20px;
     margin: auto;
+    padding: 10px;
 }
 
 .stickystack-empty {
-    background-color: transparent;
+    background-color: transparent !important;
     box-shadow: none;
     color: transparent;
     border: 3px dashed #adadad;
@@ -47,6 +48,9 @@ section {
     border: none;
     margin: 1px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 button.selected {
@@ -54,23 +58,28 @@ button.selected {
     border-radius: 3px;
 }
 
+button:hover {
+    border: 2px solid #005aff;
+    border-radius: 3px;
+}
+
 .color-button:nth-child(1) {
-    background-color: #FEF4A1;
+    background-color: var(--sticky-color-yellow);
 }
 .color-button:nth-child(2) {
-    background-color: #FEC8C8;
+    background-color: var(--sticky-color-red);
 }
 .color-button:nth-child(3) {
-    background-color: #b3fea4;
+    background-color: var(--sticky-color-green);
 }
 .color-button:nth-child(4) {
-    background-color: #aef3f3;
+    background-color: var(--sticky-color-blue);
 }
 .color-button:nth-child(5) {
-    background-color: #b7c9fd;
+    background-color: var(--sticky-color-purple);
 }
 .color-button:nth-child(6) {
-    background-color: #EEEEEE;
+    background-color: var(--sticky-color-grey);
 }
 
 .text-button:nth-child(1) {

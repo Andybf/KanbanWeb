@@ -12,40 +12,51 @@ export default class StickyStack extends AVElement {
     renderedCallback() {
         this.boardReference = this.getParentComponents()[0].body.querySelector("comp-board");
         this.stickerStack = this.body.querySelector(".stickynote-stack");
-        this.stickerStack.addEventListener('dragstart', event => {this.StackdragStart(event)});
-        this.stickerStack.addEventListener('dragend', event => {this.StackdragEnd(event)});
-
-        // this.colorSlide = this.body.querySelector("input[type='range']");
-        // this.colorSlide.onmousedown = () => {
-        //     this.colorSlide.addEventListener('mousemove', event => {this.StickerColorSlideChanged(event)});
-        // };
-        // this.colorSlide.onmouseup = () => {
-        //     this.colorSlide.onmousedown = null;
-        // };
+        this.stickerStack.addEventListener('dragstart', () => {this.StackdragStart()});
+        this.stickerStack.addEventListener('touchmove', () => {this.StackdragStart()});
+        this.stickerStack.addEventListener('dragend', () => {this.StackdragEnd()});
+        this.stickerStack.addEventListener('touchend', () => {this.StackdragEnd()});
+        this.initializeButtonsActions();
     }
 
-    StackdragStart(event) {
+    StackdragStart() {
         this.boardReference.insertStickynoteSlotsOnColumns();
         this.boardReference.insertNewColumnSlotOnBoard();
         this.stickerStack.classList.add('stickystack-empty');
     }
 
-    StackdragEnd(event) {
+    StackdragEnd() {
         this.stickerStack.classList.remove('stickystack-empty');
         this.boardReference.removeExistingColumnSlots();
         this.boardReference.removeExistingStickynoteSlots();
     }
 
-    StickerColorSlideChanged(event) {
-        let colorList = [
-            '--sticky-color-yellow',
-            '--sticky-color-red',
-            '--sticky-color-green',
-            '--sticky-color-blue',
-            '--sticky-color-purple',
-            '--sticky-color-grey'
-        ];
-        let selectedColor = colorList[event.target.value];
-        this.body.querySelector('div').style['background-color'] = `var(${selectedColor})`;
+    initializeButtonsActions() {
+        this.body.querySelectorAll(".option-buttons").forEach( element => {
+            Array.from(element.children).forEach( button => {
+                button.onclick = event => {this.handleButtonClick(event)};
+            }) 
+        });
+        const event = new MouseEvent('click', null);
+        this.body.querySelector("button[data-value*='yellow']").dispatchEvent(event);
+        this.body.querySelector("button[data-value*='CraftyGirls']").dispatchEvent(event);
+    }
+
+    handleButtonClick(event) {
+        const attribute = event.target.dataset['attr'];
+        const value = event.target.dataset['value'];
+        this.applyOptionsOnStickyStack(attribute, value);
+        this.updateSelectedOption(event);
+    }
+
+    applyOptionsOnStickyStack(attribute, value) {
+        this.stickerStack.style[attribute] = value;
+    }
+
+    updateSelectedOption(event) {
+        Array.from(event.target.parentElement.children).forEach( button => {
+            button.classList.remove('selected');
+        });
+        event.target.classList.add('selected');
     }
 }
