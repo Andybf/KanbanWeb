@@ -37,7 +37,7 @@ export default class Stickynote extends AVElement{
         this.stickynote = this.body.querySelector('div');
         this.addEventListener('dragstart', event => {this.stickynoteDragStart(event)});
         this.addEventListener('dragend', event => {this.stickynoteDragEnd(event)});
-        this.onmouseup = event => {this.activateStickerOptions(event)}
+        this.onfocus = event => {this.activateStickerOptions(event)}
         this.onblur = event => {this.deactivateStickerOptions(event)}
         this.generateColorForSticker();
         this.generateRotationForSticker();
@@ -55,21 +55,19 @@ export default class Stickynote extends AVElement{
     }
 
     stickynoteDragStart(event) {
-        this.onblur = null;
         this.recyclebinReference.activateRecycleBin();
         this.boardReference.currentOnDragStickyNote = event.target;
         this.boardReference.insertStickynoteSlotsOnColumns();
         this.boardReference.insertNewColumnSlotOnBoard();
     }
 
-    stickynoteDragEnd(event) {
+    stickynoteDragEnd() {
         this.recyclebinReference.deactivateRecycleBin();
         this.boardReference.removeExistingColumnSlots();
         this.boardReference.removeExistingStickynoteSlots();
-        this.onblur = event => {this.deactivateStickerOptions(event)}
     }
 
-    activateStickerOptions(event) {
+    activateStickerOptions() {
         setTimeout(() => {
             for(let optComp of this.getChildrenComponents()) {
                 optComp.activateOptionPanel();
@@ -78,7 +76,7 @@ export default class Stickynote extends AVElement{
         this.stickynote.style['z-index'] = '102';
     }
 
-    deactivateStickerOptions(event) {
+    deactivateStickerOptions() {
         setTimeout(() => {
             for(let optComp of this.getChildrenComponents()) {
                 optComp.deactivateOptionPanel();

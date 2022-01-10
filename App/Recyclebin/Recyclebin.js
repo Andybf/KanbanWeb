@@ -16,10 +16,10 @@ export default class Recyclebin extends AVElement {
     }
 
     recyclebinDrop(event) {
-        this.currentOnDragStickyNote = this.getParentComponents()[0].getChildrenComponents()[0].currentOnDragStickyNote
+        this.currentOnDragStickyNote = this.getParentComponents()[0].getChildrenComponents()[1].currentOnDragStickyNote
         if (this.currentOnDragStickyNote) {
             this.currentOnDragStickyNote.parentElement.parentElement.removeChild(this.currentOnDragStickyNote.parentElement);
-            this.getParentComponents()[0].getChildrenComponents()[0].currentOnDragStickyNote = null;
+            this.getParentComponents()[0].getChildrenComponents()[1].currentOnDragStickyNote = null;
             this.currentOnDragStickyNote = null;
         }
         event.target.style['animation-name'] = null;

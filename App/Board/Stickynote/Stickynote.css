@@ -13,4 +13,9 @@ comp-stickynote {
     font-size: 20px;
     padding: 10px;
     z-index: 100;
+    cursor: pointer;
+}
+
+.stickynote-content > p {
+    cursor: initial;
 }

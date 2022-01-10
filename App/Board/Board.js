@@ -16,7 +16,7 @@ export default class Board extends AVElement {
     renderedCallback() {
         this.boardList = this.body.querySelector("ul.column-list");
         this.loadNewChildrenComponent('comp-stickynote');
-        this.stickyStackReference = this.getParentComponents()[0].getChildrenComponents()[1];
+        this.stickyStackReference = this.getParentComponents()[0].getChildrenComponents()[2];
     }
 
     dropOnStickynoteSlot(event) {
@@ -44,7 +44,6 @@ export default class Board extends AVElement {
             stickerSlot.className = "sticker-item slot";
             stickerSlot.ondragover = event => {event.preventDefault()};
             stickerSlot.ondrop = event => {this.dropOnStickynoteSlot(event)};
-            stickerSlot.ontouchend = event => {this.dropOnStickynoteSlot(event)};
             column.querySelector("ul").appendChild(stickerSlot);
         }
     }
