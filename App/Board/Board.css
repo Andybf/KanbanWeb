@@ -19,16 +19,17 @@ li.column-item {
     flex-direction: column;
     row-gap: 20px;
     padding: 0 25px;
-    border-right: 1px solid black;
+    border-right: 2px solid #9a9a9a;
 }
-li.column-item:first-child {
-    padding: 0;
-    padding-right: 25px;
-}
+
 li.column-item:last-child {
     padding: 0;
     padding-left: 25px;
     border: none;
+}
+li.column-item:first-child {
+    padding: 0;
+    padding-right: 25px;
 }
 
 div.column-header {

@@ -45,6 +45,13 @@ h2:hover {
     border: dotted 1px black;
 }
 
+.version {
+    font-size: 9pt;
+    height: 30px;
+    margin-left: 10px;
+    display: flex;
+}
+
 .options-container {
     display: flex;
     column-gap: 10px;

@@ -23,9 +23,9 @@ export default class SaveBoard extends AVElement {
 
     generateBoardDataJson() {
         let content = {
-            name : this.appReference.body.querySelector("h2").innerText,
-            createdDate : Date.now(),
-            columns : []
+            'name' : this.appReference.body.querySelector("h2").innerText,
+            'createdDate' : Date.now(),
+            'columns' : []
         }
         Array.from(this.appReference.body.querySelector("comp-board").boardList.children).forEach(element => {
             let stickerList = [];
@@ -37,8 +37,8 @@ export default class SaveBoard extends AVElement {
                 });
             });
             content.columns.push({
-                title : element.querySelector("h3").innerText,
-                stickers : stickerList
+                'title' : element.querySelector("h3").innerText,
+                'stickers' : stickerList
             });
         });
         return content;
