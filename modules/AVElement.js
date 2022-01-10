@@ -105,7 +105,11 @@ export default class AVElement extends HTMLElement {
 
     async #fetchContentWithPath(path) {
         let response = await fetch(path);
-        return (response.statusText == 'OK') ? await response.text() : '';
+        if (response.statusText == 'OK') {
+            return await response.text();
+        } else {
+            return 'Something was Wrong' + response.text();
+        }        
     }
 
     #doPostLoadContentActions() {
