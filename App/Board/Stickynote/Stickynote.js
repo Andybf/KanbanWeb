@@ -29,8 +29,8 @@ export default class Stickynote extends AVElement{
     ];
 
     connectedCallback() {
-        this.boardReference = this.getParentComponents()[0];
-        this.recyclebinReference = this.getParentComponents()[1].body.querySelector("comp-recyclebin");
+        this.boardReference = this.getParentComponents().get('comp-board');
+        this.recyclebinReference = this.getParentComponents().get('comp-app').body.querySelector("comp-recyclebin");
     }
 
     renderedCallback() {

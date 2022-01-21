@@ -5,6 +5,7 @@
 */
 
 import MiniParser from './MiniCssParser.js'
+import AVutils from './AVutils.js'
 
 export default class AVElement extends HTMLElement {
 
@@ -25,8 +26,8 @@ export default class AVElement extends HTMLElement {
     }
 
     #doPreLoadContentActions() {
-        if (!this._parentComponentNameList) {
-            this._parentComponentNameList = [];
+        if (!this._parentComponentsMap) {
+            this._parentComponentsMap = new Map();
         }
         if (this.parentNode) {
             this.#catalogParentComponents(this.parentNode);
@@ -37,7 +38,7 @@ export default class AVElement extends HTMLElement {
     #catalogParentComponents(parentNode) {
         let nextParentNode = parentNode;
         if (nextParentNode.host) {
-            this._parentComponentNameList.push(nextParentNode.host);
+            this._parentComponentsMap.set(nextParentNode.host.localName, nextParentNode.host);
             this.#catalogParentComponents(nextParentNode.host);
         } else if (nextParentNode.localName.includes("html")) {
             return false;
@@ -58,9 +59,9 @@ export default class AVElement extends HTMLElement {
 
     #constructComponentRootPath() {
         let root = '/';
-        let copiedCompParents = this._parentComponentNameList.slice(0);
-        for(let x=this._parentComponentNameList.length; x>0; x--) {
-            root += `${this.#constructComponentClassName(copiedCompParents.pop())}/`
+        let parentCompCopy = new Map(this._parentComponentsMap);
+        for(let x=this._parentComponentsMap.size; x>0; x--) {
+            root += `${this.#constructComponentClassName(AVutils.mapPopValue(parentCompCopy))}/`;
         }
         return root;
     }
@@ -105,11 +106,11 @@ export default class AVElement extends HTMLElement {
 
     async #fetchContentWithPath(path) {
         let response = await fetch(path);
-        if (response.statusText == 'OK') {
+        if (response.status == 200 || response.statusText == 'OK') {
             return await response.text();
         } else {
-            return 'Something was Wrong' + response.text();
-        }        
+            return `[ERROR] code ${response.status}: ${response.statusText}`;
+        }
     }
 
     #doPostLoadContentActions() {
@@ -136,7 +137,7 @@ export default class AVElement extends HTMLElement {
         Array.from(this.attributes).forEach( attr => {
             if (attr.nodeValue.includes('{') && attr.nodeValue.includes('}')) {
                 let varName = attr.nodeValue.replace('{','').replace('}','');
-                this[attr.name] = this.getParentComponents()[0][varName];
+                this[attr.name] = Array.from(this.getParentComponents())[0][1][varName];
             }
         });
     }
@@ -153,7 +154,9 @@ export default class AVElement extends HTMLElement {
         let newComp = document.createElement(childTagName)
         let className = this.#constructComponentClassName(newComp);
         import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
-            classDefinition.default.prototype._parentComponentNameList = [this].concat(this.getParentComponents());
+            let parentMap = new Map([[this.localName, this]]);
+            AVutils.concatMaps(parentMap, this.getParentComponents());
+            classDefinition.default.prototype._parentComponentsMap = parentMap;
             this.#defineCustomComponent(newComp,classDefinition);
         });
     }
@@ -168,7 +171,7 @@ export default class AVElement extends HTMLElement {
     }
 
     getParentComponents() {
-        return this._parentComponentNameList;
+        return this._parentComponentsMap;
     }
 
     getChildrenComponents() {

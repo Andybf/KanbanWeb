@@ -16,7 +16,7 @@ export default class Board extends AVElement {
     renderedCallback() {
         this.boardList = this.body.querySelector("ul.column-list");
         this.loadNewChildrenComponent('comp-stickynote');
-        this.stickyStackReference = this.getParentComponents()[0].getChildrenComponents()[2];
+        this.stickyStackReference = this.getParentComponents().get('comp-app').body.querySelector("comp-sticky-stack");
     }
 
     dropOnStickynoteSlot(event) {

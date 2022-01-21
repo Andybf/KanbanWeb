@@ -14,7 +14,7 @@ export default class StickynoteOptions extends AVElement {
     }
 
     renderedCallback() {
-        this.stickynoteReference = this.getParentComponents()[0];
+        this.stickynoteReference = this.getParentComponents().get('comp-stickynote');
         this.options.forEach( option => {
             let button = document.createElement("button");
             button.setAttribute('data-attr',this.settingName);

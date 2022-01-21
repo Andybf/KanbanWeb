@@ -1,0 +1,23 @@
+button {
+    border: none;
+    border-radius: 5px;
+    background: #f5f5f5;
+    cursor: pointer;
+    padding: 10px;
+    user-select: none;
+    height: 30px;
+    min-width: 50px;
+    font-size: 11pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4c4c4c;
+    box-shadow: 2px 2px 4px #ababab;
+}
+button:disabled {
+    color: #cccccc;
+    pointer-events: none;
+}
+button:active {
+    box-shadow: 0px 0px 4px #ababab;
+}

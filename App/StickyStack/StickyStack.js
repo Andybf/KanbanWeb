@@ -10,7 +10,7 @@ export default class StickyStack extends AVElement {
     boardReference;
 
     renderedCallback() {
-        this.boardReference = this.getParentComponents()[0].body.querySelector("comp-board");
+        this.boardReference = this.getParentComponents().get('comp-app').body.querySelector('comp-board');
         this.stickerStack = this.body.querySelector(".stickynote-stack");
         this.stickerStack.addEventListener('dragstart', () => {this.StackdragStart()});
         this.stickerStack.addEventListener('dragend', () => {this.StackdragEnd()});
