@@ -1,89 +1,119 @@
 import AVElement from '/modules/AVElement.js'
 export default class StickynoteOptions extends AVElement {
 
-    options;
-    settingName;
-    stickynoteReference;
-    
-    constructor() {
-        super();
+    buttons = {
+        bold : {},
+        italic : {},
+        underline : {},
+        strikethrough : {},
+        justifyLeft : {},
+        justifyCenter : {},
+        justifyRight : {},
+        justify : {},
+        unorderedList : {},
+        orderedList : {},
+        fontColor : {},
+        fontBackground : {},
+        fontName : {},
+        fontSize : {}
+    };
+    colors = {
+        black : '#000000',
+        grey : '#a0a0a0',
+        white : '#f0f0f0',
+        red : '#FF0000',
+        green : '#00FF00',
+        blue : '#0000FF'
     }
-
-    connectedCallback() {
-        this.settingName = this.attributes.settingname.value;
-    }
+    fontName = [
+        'Monospace',
+        'Cursive',
+        'Fantasy',
+        'Serif',
+        'Sans Serif'
+    ];
+    fontSize = [2,3,4,5,6,7,8,9,10 ];
 
     renderedCallback() {
-        this.stickynoteReference = this.getParentComponents().get('comp-stickynote');
-        this.options.forEach( option => {
-            let button = document.createElement("button");
-            button.setAttribute('data-attr',this.settingName);
-            button.setAttribute('data-value',option);
-            button.style[this.settingName] = option;
-            button.onclick = event => {this.handleButtonClick(event)};
-            if (this.settingName.includes('font')) {
-                button.innerText = "Aa";
+        this.buttons.bold = this.body.querySelector('button[value="bold"]');
+        this.buttons.italic = this.body.querySelector('button[value="italic"]');
+        this.buttons.underline = this.body.querySelector('button[value="underline"]');
+        this.buttons.strikethrough = this.body.querySelector('button[value="strikeThrough"]');
+        this.buttons.justifyLeft = this.body.querySelector('button[value="justifyLeft"]');
+        this.buttons.justifyCenter = this.body.querySelector('button[value="justifyCenter"]');
+        this.buttons.justifyRight = this.body.querySelector('button[value="justifyRight"]');
+        this.buttons.justify = this.body.querySelector('button[value="justifyFull"]');
+        this.buttons.unorderedList = this.body.querySelector('button[value="insertUnorderedList"]');
+        this.buttons.orderedList = this.body.querySelector('button[value="insertOrderedList"]');
+        this.buttons.fontName = this.body.querySelector('button[value="fontName"]');
+        this.buttons.fontSize = this.body.querySelector('button[value="fontSize"]');
+        this.buttons.fontColor = this.body.querySelector('button[value="foreColor"]');
+        this.buttons.fontBackground = this.body.querySelector('button[value="backColor"]');
+
+        this.buttons.bold.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.italic.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.underline.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.strikethrough.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.justifyLeft.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.justifyCenter.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.justifyRight.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.justify.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.unorderedList.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.orderedList.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
+        this.buttons.fontName.onclick = event => {this.openTextMenuSelection(event)};
+        this.buttons.fontSize.onclick = event => {this.openTextMenuSelection(event)};
+        this.buttons.fontColor.onclick = event => {this.openColorMenuSelection(event)};
+        this.buttons.fontBackground.onclick = event => {this.openColorMenuSelection(event)};
+    }
+
+    executeCommand(value, arg) { /* Obsolete */
+        document.execCommand(value,false, arg);
+    }
+
+    openColorMenuSelection(event) {
+        let colorList = document.createElement("ul");
+        colorList.classList.add('color-list');
+        for(let color of Object.keys(this.colors)) {
+            let item = document.createElement("li");
+            item.setAttribute('data-value',this.colors[color]);
+            item.style.background = this.colors[color];
+            item.onclick = evt => {
+                this.executeCommand(evt.target.parentElement.parentElement.value, evt.target.dataset.value);
+                colorList.parentElement.removeChild(colorList);
+                colorListBackground.parentElement.removeChild(colorListBackground);
             }
-            this.body.querySelector("div").appendChild(button);
-        });
-        this.initializeButtonsActions();
-        this.whichSideIsComponent();
-    }
-
-    whichSideIsComponent() {
-        if(this.nextElementSibling.localName != 'style') {
-            this.body.querySelector("div").classList.add('left-side');
-        } else {
-            this.body.querySelector("div").classList.add('right-side');
+            colorList.appendChild(item);
         }
+        let colorListBackground = document.createElement("div");
+        colorListBackground.classList.add("color-list-background");
+        colorListBackground.onclick = event => {
+            colorList.parentElement.removeChild(colorList);
+            colorListBackground.parentElement.removeChild(colorListBackground);
+        };
+        event.target.appendChild(colorList);
+        event.target.appendChild(colorListBackground);
     }
 
-    initializeButtonsActions() {
-        const event = new MouseEvent('click', null);
-        let value = this.stickynoteReference.cardStyleInformation[this.options[0]];
-        let button = this.body.querySelector("button[data-value='"+value+"']");
-        button && button.dispatchEvent(event);
-    }
-
-    handleButtonClick(event) {
-        const attribute = event.target.dataset['attr'];
-        const value = event.target.dataset['value'];
-        this.applyOptionsOnStickynote(attribute, value);
-        this.updateSelectedOption(event);
-    }
-
-    applyOptionsOnStickynote(attribute, value) {
-        this.stickynoteReference.body.querySelector("div").style[attribute] = value;
-    }
-
-    updateSelectedOption(event) {
-        Array.from(event.target.parentElement.children).forEach( button => {
-            button.classList.remove('selected');
-        });
-        event.target.classList.add('selected');
-    }
-
-    activateOptionPanel() {
-        let element= this.body.firstElementChild;
-        element.style['z-index'] = '101';
-        if (element.className.includes('left')){
-            element.style['animation-name'] = 'slideToLeft';
-        } else {
-            element.style['animation-name'] = 'slideToRight';
+    openTextMenuSelection(event){
+        let textList = document.createElement("ul");
+        textList.classList.add('text-list');
+        for(let item of this[event.target.value]) {
+            let itemElement = document.createElement("li");
+            itemElement.innerText = item;
+            itemElement.onclick = evt => {
+                this.executeCommand(textList.parentElement.firstElementChild.value, evt.target.innerText);
+                textList.parentElement.removeChild(textList);
+                colorListBackground.parentElement.removeChild(colorListBackground);
+            }
+            textList.appendChild(itemElement);
         }
-        element.style['display'] = null;
-    }
-
-    deactivateOptionPanel() {
-        let element= this.body.firstElementChild;
-        if (element.className.includes('left')){
-            element.style['animation-name'] = 'closeLeft';
-        } else {
-            element.style['animation-name'] = 'closeRight';
-        }
-        setTimeout(() => {
-            element.style['z-index'] = null;
-            element.style['display'] = 'none';
-        },1000);
+        let colorListBackground = document.createElement("div");
+        colorListBackground.classList.add("color-list-background");
+        colorListBackground.onclick = event => {
+            textList.parentElement.removeChild(textList);
+            colorListBackground.parentElement.removeChild(colorListBackground);
+        };
+        event.target.parentElement.appendChild(textList);
+        event.target.parentElement.appendChild(colorListBackground);
     }
 }

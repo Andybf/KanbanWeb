@@ -9,7 +9,7 @@ export default class SaveBoard extends AVElement {
 
     renderedCallback() {
         this.body.firstElementChild.onclick = event => {this.handleClick(event)};
-        this.appReference = this.getParentComponents()[0];
+        this.appReference = this.getParentComponents().get('comp-app');
     }
 
     handleClick() {

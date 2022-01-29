@@ -37,7 +37,6 @@ export default class StickyStack extends AVElement {
         });
         const event = new MouseEvent('click', null);
         this.body.querySelector("button[data-value*='yellow']").dispatchEvent(event);
-        this.body.querySelector("button[data-value*='CraftyGirls']").dispatchEvent(event);
     }
 
     handleButtonClick(event) {

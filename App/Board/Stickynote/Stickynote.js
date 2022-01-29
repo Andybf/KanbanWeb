@@ -11,22 +11,6 @@ export default class Stickynote extends AVElement{
     recyclebinReference;
     stickynote;
     cardStyleInformation = new Map();
-    colorOptionsAvailable = [
-        'var(--sticky-color-yellow)',
-        'var(--sticky-color-red)',
-        'var(--sticky-color-green)',
-        'var(--sticky-color-blue)',
-        'var(--sticky-color-purple)',
-        'var(--sticky-color-grey)'
-    ];
-    fontOptionsAvailable = [
-        'cursive',
-        'fantasy',
-        'monospace',
-        'sans-serif',
-        'CraftyGirls',
-        'serif'
-    ];
 
     connectedCallback() {
         this.boardReference = this.getParentComponents().get('comp-board');
@@ -35,12 +19,16 @@ export default class Stickynote extends AVElement{
 
     renderedCallback() {
         this.stickynote = this.body.querySelector('div');
-        this.addEventListener('dragstart', event => {this.stickynoteDragStart(event)});
-        this.addEventListener('dragend', event => {this.stickynoteDragEnd(event)});
-        this.onfocus = event => {this.activateStickerOptions(event)}
-        this.onblur = event => {this.deactivateStickerOptions(event)}
+        this.darkBackground = this.body.querySelector('.dark-background');
+        this.ondragstart = event => {this.stickynoteDragStart(event)};
+        this.ondragend = event => {this.stickynoteDragEnd(event)};
+        this.stickynote.onmouseup = event => {this.activateStickerOptions(event);}
+        this.darkBackground.addEventListener('click', event => {
+            this.deactivateStickerOptions(event)
+        });
         this.generateColorForSticker();
         this.generateRotationForSticker();
+        this.loadNewChildrenComponent('comp-stickynote-options');
     }
 
     generateColorForSticker() {
@@ -52,6 +40,7 @@ export default class Stickynote extends AVElement{
 
     generateRotationForSticker() {
         this.body.querySelector('div').style['transform'] = `rotate(${(Math.random() * 6)+357}deg)`;
+        this.stickynoteRotation = this.body.querySelector('div').style['transform'];
     }
 
     stickynoteDragStart(event) {
@@ -68,22 +57,30 @@ export default class Stickynote extends AVElement{
     }
 
     activateStickerOptions() {
+        this.stickynote.classList.add('stickynote-content-expanded');
+        this.body.querySelector('.dark-background').style.display = 'unset';
         setTimeout(() => {
-            for(let optComp of this.getChildrenComponents()) {
-                optComp.activateOptionPanel();
-            }
-        },250);
-        this.stickynote.style['z-index'] = '102';
+            this.darkBackground.style.backdropFilter = 'blur(10px)';
+        },750);
+        this.body.firstElementChild.setAttribute('draggable', false);
+        this.ondragstart = null;
+        this.ondragend = null;
+        this.stickynote.onmouseup = null;
+        this.stickynote.prepend(document.createElement('comp-stickynote-options'));
+        let x = Math.round(window.innerWidth*0.25 - this.stickynote.getBoundingClientRect().x);
+        let y = Math.round(window.innerHeight*0.25 - this.stickynote.getBoundingClientRect().y);
+        this.stickynote.style['transform'] = `translate(${x}px, ${y}px)`;
     }
 
     deactivateStickerOptions() {
-        setTimeout(() => {
-            for(let optComp of this.getChildrenComponents()) {
-                optComp.deactivateOptionPanel();
-            }
-            setTimeout(() => {
-                this.stickynote.style['z-index'] = null;
-            },1000);
-        },250);
+        this.stickynote.classList.remove('stickynote-content-expanded');
+        this.darkBackground.style.display = null;
+        this.darkBackground.style.backdropFilter = null;
+        this.body.firstElementChild.setAttribute('draggable', true);
+        this.stickynote.style['transform'] = this.stickynoteRotation;
+        this.ondragstart = event => {this.stickynoteDragStart(event)};
+        this.ondragend = event => {this.stickynoteDragEnd(event)};
+        this.stickynote.onmouseup = event => {this.activateStickerOptions(event);}
+        this.stickynote.removeChild(this.stickynote.firstElementChild);
     }
 }

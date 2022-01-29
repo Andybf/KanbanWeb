@@ -9,14 +9,10 @@ export default class Board extends AVElement {
     currentOnDragStickyNote;
     stickyStackReference;
 
-    connectedCallback() {
-        
-    }
-
     renderedCallback() {
         this.boardList = this.body.querySelector("ul.column-list");
-        this.loadNewChildrenComponent('comp-stickynote');
         this.stickyStackReference = this.getParentComponents().get('comp-app').body.querySelector("comp-sticky-stack");
+        this.loadNewChildrenComponent('comp-stickynote');
     }
 
     dropOnStickynoteSlot(event) {
@@ -102,6 +98,8 @@ export default class Board extends AVElement {
     }
 
     deleteColumn(event) {
-        event.target.parentElement.parentElement.parentElement.removeChild(event.target.parentElement.parentElement)
+        event.target.parentElement.parentElement.parentElement.removeChild(
+            event.target.parentElement.parentElement
+        );
     }
 }
