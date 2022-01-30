@@ -1,6 +1,8 @@
 import AVElement from '/modules/AVElement.js'
 export default class StickynoteOptions extends AVElement {
 
+    selectionlistBackground = {};
+
     buttons = {
         bold : {},
         italic : {},
@@ -15,16 +17,26 @@ export default class StickynoteOptions extends AVElement {
         fontColor : {},
         fontBackground : {},
         fontName : {},
-        fontSize : {}
+        fontSize : {},
+        stickyColor : {}
     };
-    colors = {
-        black : '#000000',
-        grey : '#a0a0a0',
-        white : '#f0f0f0',
-        red : '#FF0000',
-        green : '#00FF00',
-        blue : '#0000FF'
-    }
+    colors = [
+        '#000000',
+        '#a0a0a0',
+        '#f0f0f0',
+        '#e64747',
+        '#47e653',
+        '#4747e6',
+        '#47c2e6'
+    ];
+    stickyColor = [
+        'var(--sticky-color-yellow)',
+        'var(--sticky-color-red)',
+        'var(--sticky-color-green)',
+        'var(--sticky-color-blue)',
+        'var(--sticky-color-purple)',
+        'var(--sticky-color-grey)'
+]
     fontName = [
         'Monospace',
         'Cursive',
@@ -35,6 +47,8 @@ export default class StickynoteOptions extends AVElement {
     fontSize = [2,3,4,5,6,7,8,9,10 ];
 
     renderedCallback() {
+        this.loadNewChildrenComponent('comp-list-selector');
+
         this.buttons.bold = this.body.querySelector('button[value="bold"]');
         this.buttons.italic = this.body.querySelector('button[value="italic"]');
         this.buttons.underline = this.body.querySelector('button[value="underline"]');
@@ -49,6 +63,7 @@ export default class StickynoteOptions extends AVElement {
         this.buttons.fontSize = this.body.querySelector('button[value="fontSize"]');
         this.buttons.fontColor = this.body.querySelector('button[value="foreColor"]');
         this.buttons.fontBackground = this.body.querySelector('button[value="backColor"]');
+        this.buttons.stickyColor = this.body.querySelector('button[value="stickyColor"]');
 
         this.buttons.bold.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
         this.buttons.italic.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
@@ -60,60 +75,36 @@ export default class StickynoteOptions extends AVElement {
         this.buttons.justify.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
         this.buttons.unorderedList.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
         this.buttons.orderedList.onclick = event => {this.executeCommand(event.target.value, event.target.value)};
-        this.buttons.fontName.onclick = event => {this.openTextMenuSelection(event)};
-        this.buttons.fontSize.onclick = event => {this.openTextMenuSelection(event)};
-        this.buttons.fontColor.onclick = event => {this.openColorMenuSelection(event)};
-        this.buttons.fontBackground.onclick = event => {this.openColorMenuSelection(event)};
+        this.buttons.fontName.onclick = event => {this.openMenuSelection(event)};
+        this.buttons.fontSize.onclick = event => {this.openMenuSelection(event)};
+        this.buttons.fontColor.onclick = event => {this.openMenuSelection(event)};
+        this.buttons.fontBackground.onclick = event => {this.openMenuSelection(event)};
+        this.buttons.stickyColor.onclick = event => {this.openMenuSelection(event)};
     }
 
     executeCommand(value, arg) { /* Obsolete */
         document.execCommand(value,false, arg);
     }
 
-    openColorMenuSelection(event) {
-        let colorList = document.createElement("ul");
-        colorList.classList.add('color-list');
-        for(let color of Object.keys(this.colors)) {
-            let item = document.createElement("li");
-            item.setAttribute('data-value',this.colors[color]);
-            item.style.background = this.colors[color];
-            item.onclick = evt => {
-                this.executeCommand(evt.target.parentElement.parentElement.value, evt.target.dataset.value);
-                colorList.parentElement.removeChild(colorList);
-                colorListBackground.parentElement.removeChild(colorListBackground);
-            }
-            colorList.appendChild(item);
-        }
-        let colorListBackground = document.createElement("div");
-        colorListBackground.classList.add("color-list-background");
-        colorListBackground.onclick = event => {
-            colorList.parentElement.removeChild(colorList);
-            colorListBackground.parentElement.removeChild(colorListBackground);
-        };
-        event.target.appendChild(colorList);
-        event.target.appendChild(colorListBackground);
+    openMenuSelection(event){
+        let menu = document.createElement('comp-list-selector');
+        menu.sourceItems = this[event.target.dataset.listsource];
+        menu.selectionType = event.target.dataset.type;
+        menu.sourceName = event.target.value;
+        event.target.parentElement.appendChild(menu);
     }
 
-    openTextMenuSelection(event){
-        let textList = document.createElement("ul");
-        textList.classList.add('text-list');
-        for(let item of this[event.target.value]) {
-            let itemElement = document.createElement("li");
-            itemElement.innerText = item;
-            itemElement.onclick = evt => {
-                this.executeCommand(textList.parentElement.firstElementChild.value, evt.target.innerText);
-                textList.parentElement.removeChild(textList);
-                colorListBackground.parentElement.removeChild(colorListBackground);
-            }
-            textList.appendChild(itemElement);
+    handleInputFromSelectionList(event, menuName) {
+        if (menuName == 'stickyColor') {
+            let stickynote = this.getParentComponents().get('comp-stickynote');
+            stickynote.cardStyleInformation.set('background-color', event.target.style.backgroundColor);
+            stickynote.generateColorForSticker();
+        } else {
+            this.executeCommand(menuName, event.target.dataset.value);
         }
-        let colorListBackground = document.createElement("div");
-        colorListBackground.classList.add("color-list-background");
-        colorListBackground.onclick = event => {
-            textList.parentElement.removeChild(textList);
-            colorListBackground.parentElement.removeChild(colorListBackground);
-        };
-        event.target.parentElement.appendChild(textList);
-        event.target.parentElement.appendChild(colorListBackground);
+    }
+
+    destroyMenu(menu) {
+        menu.parentElement.removeChild(menu);
     }
 }

@@ -38,6 +38,7 @@ div.column-header {
     border-bottom: 2px solid #9a9a9a;
     padding-bottom: 5px;
     height: 32px;
+    column-gap: 5px;
 }
 
 div.column-header:hover > button {
@@ -50,6 +51,7 @@ h3 {
     align-items: flex-end;
     display: flex;
     width: -webkit-fill-available;
+    border: 1px solid transparent;
 }
 h3:hover {
     border: dotted 1px black;

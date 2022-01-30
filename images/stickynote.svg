@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#4e4e4e">
-    <rect width="32" height="4" ry="3"/>
-    <rect width="16" height="4" ry="3" y="9"/>
-    <rect width="8" height="4" ry="3" y="19"/>
-    <rect width="24" height="4" ry="3" y="28"/>
+  <rect width="32" height="32" ry="3" x="0"/>
+  <rect width="15" height="16" x="24" y="24" fill="white" fill-opacity="0.5" transform="rotate(45 32 32)"/>
 </svg>

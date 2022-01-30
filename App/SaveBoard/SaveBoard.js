@@ -31,7 +31,7 @@ export default class SaveBoard extends AVElement {
             let stickerList = [];
             Array.from(element.querySelector("ul").children).forEach( item => {
                 stickerList.push({
-                    'text' : item.firstElementChild.body.querySelector('div').innerText,
+                    'content' : item.firstElementChild.body.querySelector('div').firstElementChild.innerHTML,
                     'background-color' : item.firstElementChild.cardStyleInformation.get('background-color'),
                     'font-family' : item.firstElementChild.cardStyleInformation.get('font-family')
                 });

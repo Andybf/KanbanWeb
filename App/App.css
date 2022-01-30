@@ -50,6 +50,7 @@ h2:hover {
     height: 30px;
     margin-left: 10px;
     display: flex;
+    flex-direction: column;
 }
 
 .options-container {

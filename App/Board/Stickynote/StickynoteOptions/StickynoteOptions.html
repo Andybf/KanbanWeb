@@ -26,6 +26,8 @@
         <button
             class="selection-button"
             value="fontName"
+            data-listsource="fontName"
+            data-type="text"
         >Fonte</button>
     </section>
 
@@ -33,6 +35,8 @@
         <button
             class="selection-button"
             value="fontSize"
+            data-listsource="fontSize"
+            data-type="text"
         >Tamanho</button>
     </section>
 
@@ -42,11 +46,15 @@
                 title="Cor da Fonte"
                 class="editor-action"
                 value="foreColor"
+                data-listsource="colors"
+                data-type="color"
             ></button>
             <button
                 title="Cor de Fundo da Fonte"
                 class="editor-action"
                 value="backColor"
+                data-listsource="colors"
+                data-type="color"
             ></button>
         </section>
     </section>
@@ -83,13 +91,24 @@
             title="Inserir Lista Não Ordenada"
             class="editor-action"
             value="insertUnorderedList" 
-            style="background-image:url(/images/justify.svg)"
+            style="background-image:url(/images/unorderedList.svg)"
         ></button>
         <button
             title="Inserir Lista Ordenada"
             class="editor-action"
             value="insertOrderedList"
-            style="background-image:url(/images/justify.svg)"
+            style="background-image:url(/images/orderedList.svg)"
+        ></button>
+    </section>
+
+    <section class="button-group">
+        <button
+            title="Cor da nota"
+            class="editor-action"
+            value="stickyColor"
+            data-listsource="stickyColor"
+            data-type="color"
+            style="background-image:url(/images/stickynote.svg)"
         ></button>
     </section>
 </div>
