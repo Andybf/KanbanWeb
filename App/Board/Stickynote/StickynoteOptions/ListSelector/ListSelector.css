@@ -3,7 +3,7 @@ ul::before {
     width: 10px;
     background: white;
     position: absolute;
-    transform: translate(28px, -6px) rotate(45deg);
+    transform: translate(28px, -12px) rotate(45deg);
     border-left: 1px solid #d8dde6;
     border-top: 1px solid #d8dde6;
     content: "";
@@ -14,8 +14,8 @@ ul.color-list {
     border: 1px solid #D8DDE6;
     border-radius: 5px;
     position: fixed;
-    top: 42px;
-    transform: translateX(-50px);
+    top: 36px;
+    transform: translateX(-55px);
     background: white;
     padding: 5px;
     column-gap: 2px;
@@ -47,7 +47,7 @@ ul.text-list {
     background-color: white;
     border-radius: .25rem;
     border: 1px solid #d4d4d4;
-    width: 128px;
+    width: 118px;
     max-height: 256px;
     overflow: auto;
     top: 20px;

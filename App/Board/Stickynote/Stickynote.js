@@ -13,11 +13,12 @@ export default class Stickynote extends AVElement{
     cardStyleInformation = new Map();
 
     connectedCallback() {
-        this.boardReference = this.getParentComponents().get('comp-board');
-        this.recyclebinReference = this.getParentComponents().get('comp-app').body.querySelector("comp-recyclebin");
+
     }
 
     renderedCallback() {
+        this.boardReference = this.getParentComponents().get('comp-board');
+        this.recyclebinReference = this.getParentComponents().get('comp-app').body.querySelector("comp-recyclebin");
         this.stickynote = this.body.querySelector('div');
         this.darkBackground = this.body.querySelector('.dark-background');
         this.ondragstart = event => {this.stickynoteDragStart(event)};
@@ -39,7 +40,7 @@ export default class Stickynote extends AVElement{
     }
 
     generateRotationForSticker() {
-        this.body.querySelector('div').style['transform'] = `rotate(${(Math.random() * 6)+357}deg)`;
+        this.stickynote.style['transform'] = `rotate(${(Math.random() * 6)+-3}deg)`;
         this.stickynoteRotation = this.body.querySelector('div').style['transform'];
     }
 
@@ -61,7 +62,7 @@ export default class Stickynote extends AVElement{
         this.body.querySelector('.dark-background').style.display = 'unset';
         setTimeout(() => {
             this.darkBackground.style.backdropFilter = 'blur(10px)';
-        },750);
+        },330);
         this.body.firstElementChild.setAttribute('draggable', false);
         this.ondragstart = null;
         this.ondragend = null;
@@ -74,13 +75,16 @@ export default class Stickynote extends AVElement{
 
     deactivateStickerOptions() {
         this.stickynote.classList.remove('stickynote-content-expanded');
-        this.darkBackground.style.display = null;
-        this.darkBackground.style.backdropFilter = null;
-        this.body.firstElementChild.setAttribute('draggable', true);
         this.stickynote.style['transform'] = this.stickynoteRotation;
-        this.ondragstart = event => {this.stickynoteDragStart(event)};
-        this.ondragend = event => {this.stickynoteDragEnd(event)};
+        this.stickynote.style['position'] = 'absolute';
+        setTimeout(() => {
+            this.stickynote.style['position'] = null;
+        },330);
         this.stickynote.onmouseup = event => {this.activateStickerOptions(event);}
         this.stickynote.removeChild(this.stickynote.firstElementChild);
+        this.darkBackground.style = null;
+        this.body.firstElementChild.setAttribute('draggable', true);
+        this.ondragstart = event => {this.stickynoteDragStart(event)};
+        this.ondragend = event => {this.stickynoteDragEnd(event)};
     }
 }

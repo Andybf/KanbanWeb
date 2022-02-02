@@ -22,6 +22,11 @@ export default class AVElement extends HTMLElement {
         await this.#appendHTMLtoComponent();
         await this.#appendCSStoComponentBody();
         this.#doPostLoadContentActions();
+        if (this._parentComponentsMap.size > 0) {
+            if (!this._parentComponentsMap.get('comp-app').namespaceURI) {
+                this.#catalogParentComponents(this.parentNode);
+            }
+        }
         this.renderedCallback();
     }
 
@@ -37,7 +42,9 @@ export default class AVElement extends HTMLElement {
 
     #catalogParentComponents(parentNode) {
         let nextParentNode = parentNode;
-        if (nextParentNode.host) {
+        if (!nextParentNode) {
+            return false;
+        } else if (nextParentNode.host) {
             this._parentComponentsMap.set(nextParentNode.host.localName, nextParentNode.host);
             this.#catalogParentComponents(nextParentNode.host);
         } else if (nextParentNode.localName.includes("html")) {
@@ -154,7 +161,7 @@ export default class AVElement extends HTMLElement {
         let newComp = document.createElement(childTagName)
         let className = this.#constructComponentClassName(newComp);
         import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
-            let parentMap = new Map([[this.localName, this]]);
+            let parentMap = new Map([[this.localName, {localName: this.localName} ]]);
             AVutils.concatMaps(parentMap, this.getParentComponents());
             classDefinition.default.prototype._parentComponentsMap = parentMap;
             this.#defineCustomComponent(newComp,classDefinition);

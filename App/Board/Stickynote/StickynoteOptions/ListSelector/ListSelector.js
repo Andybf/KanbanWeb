@@ -1,7 +1,7 @@
 import AVElement from '/modules/AVElement.js'
 export default class ListSelector extends AVElement {
 
-    sourceItems;
+    sourceItems = [];
     sourceName;
     selectionType;
 
@@ -29,7 +29,7 @@ export default class ListSelector extends AVElement {
             let selectorItem = document.createElement('li');
             if (this.selectionType == 'color-list') {
                 selectorItem.style.backgroundColor = item;
-            } else if (this.selectionType == 'text-list'){
+            } else if (this.selectionType == 'text-list') {
                 selectorItem.innerText = item;
             }
             selectorItem.dataset.value = item;

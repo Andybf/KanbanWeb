@@ -39,7 +39,8 @@ h2 {
     text-align: center;
     min-width: 50px;
     padding: 5px 10px;
-    border-radius: 10px;
+    border-radius: 3px;
+    width: -webkit-fill-available;
 }
 h2:hover {
     border: dotted 1px black;
