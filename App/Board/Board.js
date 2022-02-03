@@ -32,6 +32,7 @@ export default class Board extends AVElement {
         this.stickyStackReference.body.querySelectorAll(".selected").forEach(element => {
             compStickerNote.cardStyleInformation.set(element.dataset['attr'], element.dataset['value']);
         });
+        compStickerNote.setAttribute('textvalue','Digite algo aqui...');
     }
 
     insertStickynoteSlotsOnColumns() {
@@ -70,12 +71,15 @@ export default class Board extends AVElement {
         }
     }
 
-    convertColumnSlotToColumn(event) {
+    convertColumnSlotToColumn(column) {
         let listItem = document.importNode(this.body.querySelector("template#column-content").content,true);
         listItem.querySelector("#recycle-button").addEventListener('click', event => {this.deleteColumn(event)});
-        event.target.appendChild(listItem);
-        this.deactivateStickerSlot(event.target);
+        column.appendChild(listItem);
+        this.deactivateStickerSlot(column);        
+    }
 
+    columnDrop(event) {
+        this.convertColumnSlotToColumn(event.target);
         if (this.currentOnDragStickyNote) {
             event.target.lastElementChild.appendChild(this.currentOnDragStickyNote.parentElement);
             this.currentOnDragStickyNote = null;
@@ -85,10 +89,6 @@ export default class Board extends AVElement {
             event.target.lastElementChild.appendChild(stickerSlot);
             this.createNewStickernoteOnColumnList(event.target.lastElementChild);
         }
-    }
-
-    columnDrop(event) {
-        this.convertColumnSlotToColumn(event);
     }
 
     deactivateStickerSlot(slot) {

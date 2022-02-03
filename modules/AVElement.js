@@ -22,11 +22,7 @@ export default class AVElement extends HTMLElement {
         await this.#appendHTMLtoComponent();
         await this.#appendCSStoComponentBody();
         this.#doPostLoadContentActions();
-        if (this._parentComponentsMap.size > 0) {
-            if (!this._parentComponentsMap.get('comp-app').namespaceURI) {
-                this.#catalogParentComponents(this.parentNode);
-            }
-        }
+        this.reconstructOnFlyComponentParents();
         this.renderedCallback();
     }
 
@@ -138,6 +134,14 @@ export default class AVElement extends HTMLElement {
         this.#childrenComponentList.forEach( componentNode => {
             this._initializeChildrenComponent(componentNode);
         })
+    }
+
+    reconstructOnFlyComponentParents() {
+        if (this._parentComponentsMap.size > 0) {
+            if (!this._parentComponentsMap.get('comp-app').namespaceURI) {
+                this.#catalogParentComponents(this.parentNode);
+            }
+        }
     }
 
     #loadParentCustomAttributes() {

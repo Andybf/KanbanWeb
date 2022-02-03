@@ -55,6 +55,7 @@ ul.text-list {
     z-index: 9999;
     left: 0;
 }
+
 .text-list > li {
     padding: 10px;
     cursor: pointer;
@@ -62,6 +63,11 @@ ul.text-list {
     display: flex;
     text-align: initial;
 }
+
 .text-list > li:nth-child(even) {
-    background-color: #f3f3f3;
+    background-color: #f6f6f6;
+}
+
+.text-list > li:hover {
+    background-color: #f0f0f0;
 }

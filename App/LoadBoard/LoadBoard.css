@@ -21,3 +21,11 @@ button:disabled {
 button:active {
     box-shadow: 0px 0px 4px #ababab;
 }
+
+input {
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    display: none;
+}
