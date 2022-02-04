@@ -4,7 +4,7 @@ comp-stickynote {
 }
 
 .stickynote-content {
-    box-shadow: -3px 4px 5px 2px #797979;
+    box-shadow: -3px 4px 5px 2px var(--global-shadow);
     width: 190px;
     height: 130px;
     font-size: 20px;
@@ -16,13 +16,18 @@ comp-stickynote {
     overflow: hidden;
     cursor: grab;
 }
+
+.stickynote-content[hoverEffect = true]:hover {
+    transform: scale(1.1) !important;
+}
+
 .stickynote-content > textarea {
     cursor: grab;
 }
 
 .stickynote-content-expanded {
     z-index: 301;
-    box-shadow: 0 0 6px 4px #b3b3b3;
+    box-shadow: 0 0 6px 4px var(--global-shadow);
     width: 66.66%;
     height: 66.66%;
     flex-direction: column;
@@ -56,6 +61,11 @@ article {
     height: 100%;
     z-index: 300;
     transition: 0.33s;
+    backdrop-filter: blur(0px) brightness(1.0);
+}
+
+.background-blur {
+    backdrop-filter: var(--global-background-brightness);
 }
 
 comp-stickynote-options {

@@ -8,17 +8,17 @@ section {
     width: 270px;
     justify-content: space-between;
     align-content: center;
-    box-shadow: 0 0 10px 3px #cccccc;
+    box-shadow: 0 0 10px 3px var(--global-shadow);
     border-radius: 0 10rem 0 0;
     padding: 10px;
     pointer-events: all;
-    background: white;
+    background: var(--interface-background);
 }
 
 .stickynote-stack {
     cursor: grab;
-    box-shadow: -3px 4px 5px 2px #797979;
-    transform: rotate(358deg);
+    box-shadow: -3px 4px 5px 2px var(--global-shadow);
+    transform: rotate(-2deg);
     width: 180px;
     height: 130px;
     display: flex;
@@ -27,8 +27,12 @@ section {
     font-size: 20px;
     margin: auto;
     padding: 10px;
+    transition: 0.33s;
 }
-
+.stickynote-stack:hover {
+    transform: scale(1.1) !important;
+    transition: 0.33s;
+}
 .stickystack-empty {
     background-color: transparent !important;
     box-shadow: none;
@@ -54,12 +58,12 @@ section {
 }
 
 button.selected {
-    border: 3px solid #005aff;
+    border: 3px solid var(--interface-background);
     border-radius: 3px;
 }
 
 button:hover {
-    border: 2px solid #005aff;
+    border: 2px solid var(--interface-background);
     border-radius: 3px;
 }
 

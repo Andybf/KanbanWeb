@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="140" height="40" fill="white">
+	<rect x="0" y="0" width="140" height="40" ry="5" fill="#989898" ></rect>
+	<text x="15" y="25" font-family="sans-serif" fill="white" >+ Adicione Aqui</text>
+</svg>

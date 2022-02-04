@@ -12,10 +12,6 @@ export default class Stickynote extends AVElement{
     stickynote;
     cardStyleInformation = new Map();
 
-    connectedCallback() {
-
-    }
-
     renderedCallback() {
         this.boardReference = this.getParentComponents().get('comp-board');
         this.recyclebinReference = this.getParentComponents().get('comp-app').body.querySelector("comp-recyclebin");
@@ -66,9 +62,10 @@ export default class Stickynote extends AVElement{
         this.stickynote.classList.add('stickynote-content-expanded');
         this.body.querySelector('.dark-background').style.display = 'unset';
         setTimeout(() => {
-            this.darkBackground.style.backdropFilter = 'blur(10px)';
+            this.darkBackground.classList.add('background-blur');
         },330);
         this.body.firstElementChild.setAttribute('draggable', false);
+        this.body.firstElementChild.setAttribute('hoverEffect', false);
         this.ondragstart = null;
         this.ondragend = null;
         this.stickynote.onmouseup = null;
@@ -88,8 +85,10 @@ export default class Stickynote extends AVElement{
         },330);
         this.stickynote.onmouseup = event => {this.activateStickerOptions(event);}
         this.stickynote.removeChild(this.stickynote.firstElementChild);
+        this.darkBackground.classList.remove('background-blur');
         this.darkBackground.style = null;
         this.body.firstElementChild.setAttribute('draggable', true);
+        this.body.firstElementChild.setAttribute('hoverEffect', true);
         this.ondragstart = event => {this.stickynoteDragStart(event)};
         this.ondragend = event => {this.stickynoteDragEnd(event)};
     }
