@@ -9,9 +9,12 @@ export default class Board extends AVElement {
     currentOnDragStickyNote;
     stickyStackReference;
 
+    connectedCallback() {
+        this.stickyStackReference = this.getParentComponents().get('comp-app').body.querySelector("comp-sticky-stack");
+    }
+
     renderedCallback() {
         this.boardList = this.body.querySelector("ul.column-list");
-        this.stickyStackReference = this.getParentComponents().get('comp-app').body.querySelector("comp-sticky-stack");
         this.loadNewChildrenComponent('comp-stickynote');
     }
 
@@ -30,7 +33,7 @@ export default class Board extends AVElement {
         this.deactivateStickerSlot(listItem);
         listItem.appendChild(compStickerNote);
         this.stickyStackReference.body.querySelectorAll(".selected").forEach(element => {
-            compStickerNote.cardStyleInformation.set(element.dataset['attr'], element.dataset['value']);
+            compStickerNote.setAttribute(element.dataset['attr'], element.dataset['value']);
         });
         compStickerNote.setAttribute('textvalue','Digite algo aqui...');
     }
@@ -50,7 +53,7 @@ export default class Board extends AVElement {
         newColumn.className = "column-item slot";
         newColumn.ondragover = event => {event.preventDefault()};
         newColumn.ondrop = event => {this.columnDrop(event)};
-        this.boardList.appendChild(newColumn);
+        this.body.querySelector("ul.column-list").appendChild(newColumn);
     }
 
     removeExistingColumnSlots() {

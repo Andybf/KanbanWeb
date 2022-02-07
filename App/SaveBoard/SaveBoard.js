@@ -8,8 +8,18 @@ export default class SaveBoard extends AVElement {
     appReference;
 
     renderedCallback() {
-        this.body.firstElementChild.onclick = event => {this.handleClick(event)};
+        this.body.firstElementChild.onclick = event => {
+            this.saveOnLocalStorage();
+            this.handleClick(event)
+        };
         this.appReference = this.getParentComponents().get('comp-app');
+    }
+
+    saveOnLocalStorage() {
+        if (window.localStorage) {
+            const content = this.generateBoardDataJson();
+            window.localStorage.lastSave = JSON.stringify(content,null,4);
+        }
     }
 
     handleClick() {
@@ -32,8 +42,7 @@ export default class SaveBoard extends AVElement {
             Array.from(element.querySelector("ul").children).forEach( item => {
                 stickerList.push({
                     'content' : item.firstElementChild.body.querySelector('div').firstElementChild.innerHTML,
-                    'background-color' : item.firstElementChild.cardStyleInformation.get('background-color'),
-                    'font-family' : item.firstElementChild.cardStyleInformation.get('font-family')
+                    'background-color' : item.firstElementChild.attributes['background-color'].nodeValue
                 });
             });
             content.columns.push({

@@ -97,7 +97,7 @@ export default class StickynoteOptions extends AVElement {
     handleInputFromSelectionList(event, menuName) {
         if (menuName == 'stickyColor') {
             let stickynote = this.getParentComponents().get('comp-stickynote');
-            stickynote.cardStyleInformation.set('background-color', event.target.style.backgroundColor);
+            stickynote.setAttribute('background-color', event.target.style.backgroundColor);
             stickynote.generateColorForSticker();
         } else {
             this.executeCommand(menuName, event.target.dataset.value);

@@ -10,7 +10,6 @@ export default class Stickynote extends AVElement{
     stickyStackReference;
     recyclebinReference;
     stickynote;
-    cardStyleInformation = new Map();
 
     renderedCallback() {
         this.boardReference = this.getParentComponents().get('comp-board');
@@ -31,9 +30,7 @@ export default class Stickynote extends AVElement{
 
     generateColorForSticker() {
         let stickerBody = this.body.querySelector('div');
-        this.cardStyleInformation.forEach( (value,key) => {
-            stickerBody.style[key] = value;
-        });        
+        stickerBody.style['background-color'] = this.attributes['background-color'].nodeValue;
     }
 
     generateContentForSticker() {

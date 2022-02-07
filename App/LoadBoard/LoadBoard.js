@@ -18,6 +18,7 @@ export default class LoadBoard extends AVElement {
         this.loadInput.onchange = event => {
             this.getSaveFile(event);
         };
+        this.getSaveFromBrowserLocalStorage();
     }
 
     getSaveFile(input) {
@@ -33,6 +34,16 @@ export default class LoadBoard extends AVElement {
         };
     }
 
+    getSaveFromBrowserLocalStorage() {
+        try {
+            if (window.localStorage.lastSave) {
+                this.loadFromJson(JSON.parse(window.localStorage.lastSave));
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
     loadFromJson(json) {
         this.setBoardTitle(json.name);
         this.resetBoard();
@@ -45,7 +56,6 @@ export default class LoadBoard extends AVElement {
 
     resetBoard() {
         let boardList = this.getParentComponents().get('comp-app').body.querySelector('comp-board');
-        debugger;
         for (let x=0; x<boardList.body.firstElementChild.children.length; x++) {
             boardList.body.firstElementChild.removeChild(boardList.body.firstElementChild.firstElementChild)
         }
@@ -66,8 +76,8 @@ export default class LoadBoard extends AVElement {
                 columnitem.lastElementChild.appendChild(stickerSlot);
                 board.createNewStickernoteOnColumnList(columnitem.lastElementChild);
                 let createdSticky =  columnitem.lastElementChild.lastElementChild.querySelector('comp-stickynote');
-                createdSticky.cardStyleInformation.set('background-color',sticker['background-color']);
-                createdSticky.setAttribute('textValue',sticker['content']);
+                createdSticky.setAttribute('background-color', sticker['background-color']);
+                createdSticky.setAttribute('textValue', sticker['content']);
             });
         });
     }
