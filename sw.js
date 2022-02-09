@@ -6,7 +6,7 @@ const filesToCache = [
     pathname+'/style.css',
     pathname+'/script.js',
     pathname+'/modules/AVElement.js',
-    pathname+'/modules/AVUtils.js',
+    pathname+'/modules/AVutils.js',
     pathname+'/modules/MiniCssParser.js',
     pathname+'/App/App.js',
     pathname+'/App/App.html',
