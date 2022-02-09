@@ -1,4 +1,4 @@
-import AVElement from '/modules/AVElement.js'
+import AVElement from './modules/AVElement.js'
 export default class StickynoteOptions extends AVElement {
 
     selectionlistBackground = {};
