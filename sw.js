@@ -62,7 +62,9 @@ async function performActivationOperations() {
 
 async function performInstalloperations() {
     let clientCache = await caches.open(cacheName);
-    return clientCache.addAll(filesToCache);
+    for (let fileToCache of filesToCache) {
+        await clientCache.add(fileToCache);
+    }
 }
 
 async function handleFetchRequisition(event) {
