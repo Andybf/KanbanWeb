@@ -1,4 +1,4 @@
-import AVElement from './modules/AVElement.js'
+import AVElement from '/FreeWebKanban/modules/AVElement.js'
 export default class ListSelector extends AVElement {
 
     sourceItems = [];

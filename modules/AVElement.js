@@ -61,7 +61,7 @@ export default class AVElement extends HTMLElement {
     }
 
     #constructComponentRootPath() {
-        let root = '/';
+        let root = window.location.pathname;
         let parentCompCopy = new Map(this._parentComponentsMap);
         for(let x=this._parentComponentsMap.size; x>0; x--) {
             root += `${this.#constructComponentClassName(AVutils.mapPopValue(parentCompCopy))}/`;

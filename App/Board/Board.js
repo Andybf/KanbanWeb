@@ -2,7 +2,7 @@
  * FreeWebKanban © 2022 Anderson Bucchianico. All rights reserved.
 */
 
-import AVElement from './modules/AVElement.js'
+import AVElement from '/FreeWebKanban/modules/AVElement.js'
 export default class Board extends AVElement {
 
     boardList;
