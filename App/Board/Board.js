@@ -35,7 +35,7 @@ export default class Board extends AVElement {
         this.stickyStackReference.body.querySelectorAll(".selected").forEach(element => {
             compStickerNote.setAttribute(element.dataset['attr'], element.dataset['value']);
         });
-        compStickerNote.setAttribute('textvalue','Digite algo aqui...');
+        compStickerNote.setAttribute('textvalue','Type something here...');
     }
 
     insertStickynoteSlotsOnColumns() {
