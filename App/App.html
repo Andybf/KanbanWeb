@@ -1,23 +1,22 @@
 
 <header>
-    <h1>FreeWebKanban
-        <div class="version">
-            
-            <span>
-                version: 0.5 Beta
-            </span>
-            <span>
-                By: Anderson Bucchianico
-            </span>
+    <nav class="header-node">
+        <h1>FreeWebKanban</h1>
+        <div class="extra-info-container">
+            <span class="extra-info">Created by:</span>
+            <span class="extra-info">Anderson Bucchianico</span>
         </div>
-    </h1>
-    <nav>
-        <h2 contenteditable="true">Dê um nome para este quadro...</h2>
     </nav>
-    <div class="options-container">
-        <comp-save-board></comp-save-board>
-        <comp-load-board></comp-load-board>
-    </div>
+    <section class="header-node">
+        <input
+            type="text"
+            maxlength="255"
+            placeholder="Dê um nome para este quadro..."
+        >
+    </section>
+    <section class="header-node">
+        <comp-menu></comp-menu>
+    </section>
 </header>
 
 <section class="board-container">

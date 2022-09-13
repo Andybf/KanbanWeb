@@ -7,22 +7,18 @@ const filesToCache = [
     pathname+'/script.js',
     pathname+'/modules/AVElement.js',
     pathname+'/modules/AVutils.js',
-    pathname+'/modules/MiniCssParser.js',
     pathname+'/App/App.js',
     pathname+'/App/App.html',
     pathname+'/App/App.css',
+    pathname+'/App/Menu/Menu.js',
+    pathname+'/App/Menu/Menu.html',
+    pathname+'/App/Menu/Menu.css',
     pathname+'/App/Board/Board.js',
     pathname+'/App/Board/Board.html',
     pathname+'/App/Board/Board.css',
-    pathname+'/App/LoadBoard/LoadBoard.js',
-    pathname+'/App/LoadBoard/LoadBoard.html',
-    pathname+'/App/LoadBoard/LoadBoard.css',
     pathname+'/App/Recyclebin/Recyclebin.js',
     pathname+'/App/Recyclebin/Recyclebin.html',
     pathname+'/App/Recyclebin/Recyclebin.css',
-    pathname+'/App/SaveBoard/SaveBoard.js',
-    pathname+'/App/SaveBoard/SaveBoard.html',
-    pathname+'/App/SaveBoard/SaveBoard.css',
     pathname+'/App/StickyStack/StickyStack.js',
     pathname+'/App/StickyStack/StickyStack.html',
     pathname+'/App/StickyStack/StickyStack.css',
@@ -70,7 +66,6 @@ async function performInstalloperations() {
 async function handleFetchRequisition(event) {
     let response = await caches.match(event.request);
     if(!response) {
-        console.log('not fund in cache')
         response = await fetch(event.request);
         let clientCache = await caches.open(cacheName);
         clientCache.put(event.request, response.clone());

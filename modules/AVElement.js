@@ -4,7 +4,6 @@
  * 
 */
 
-import MiniParser from './MiniCssParser.js'
 import AVutils from './AVutils.js'
 
 export default class AVElement extends HTMLElement {
@@ -22,7 +21,7 @@ export default class AVElement extends HTMLElement {
         await this.#appendHTMLtoComponent();
         await this.#appendCSStoComponentBody();
         this.#doPostLoadContentActions();
-        this.reconstructOnFlyComponentParents();
+        this.#reconstructComponentParentsMap();
         this.renderedCallback();
     }
 
@@ -95,15 +94,7 @@ export default class AVElement extends HTMLElement {
         await this.#fetchContentWithPath(this.#componentpath.css).then( cssText => {
             let styleNode = document.createElement("style");
             styleNode.innerText = removeCommentsAndBreakLines(cssText);
-            this.#applyStylesToComponentRootElement(cssText);
             this.body.appendChild(styleNode);
-        });
-    }
-
-    #applyStylesToComponentRootElement(cssText) {
-        let compStyle = new MiniParser().parseToJSON(this.localName, cssText);
-        compStyle && Object.keys(compStyle).forEach( (attr) => {
-            this.style[attr] = compStyle[attr]
         });
     }
 
@@ -118,8 +109,7 @@ export default class AVElement extends HTMLElement {
 
     #doPostLoadContentActions() {
         this.#catalogChildrenComponents();
-        this.#initializeAllChildrenComponents();
-        this.attributes.length > 0 && this.#loadParentCustomAttributes();
+        this.#initializeAllPreDefinedChildrenComponents();
     }
 
     #catalogChildrenComponents() {
@@ -130,35 +120,35 @@ export default class AVElement extends HTMLElement {
         })
     }
 
-    #initializeAllChildrenComponents() {
-        this.#childrenComponentList.forEach( componentNode => {
-            this._initializeChildrenComponent(componentNode);
+    #initializeAllPreDefinedChildrenComponents() {
+        this.#childrenComponentList.forEach( componentElement => {
+            this.#importChildrenComponentDefinition(componentElement);
         })
     }
 
-    reconstructOnFlyComponentParents() {
-        if (this._parentComponentsMap.size > 0) {
-            if (!this._parentComponentsMap.get('comp-app').namespaceURI) {
-                this.#catalogParentComponents(this.parentNode);
-            }
-        }
-    }
-
-    #loadParentCustomAttributes() {
-        Array.from(this.attributes).forEach( attr => {
-            if (attr.nodeValue.includes('{') && attr.nodeValue.includes('}')) {
-                let varName = attr.nodeValue.replace('{','').replace('}','');
-                this[attr.name] = Array.from(this.getParentComponents())[0][1][varName];
-            }
-        });
-    }
-
-    _initializeChildrenComponent(componentElement) {
+    #importChildrenComponentDefinition(componentElement) {
         let className = this.#constructComponentClassName(componentElement);
         import(`${this.#componentpath.root}/${className}/${className}.js`)
         .then( classDefinition => {
             this.#defineCustomComponent(componentElement,classDefinition);
         });
+    }
+
+    #defineCustomComponent(htmlNode,classDefinition) {
+        function isComponentAlreadyDefined(name) {
+            return window.customElements.get(name);
+        }
+        if (classDefinition.default && !isComponentAlreadyDefined(htmlNode.localName)) {
+            customElements.define(htmlNode.localName,classDefinition.default);
+        }
+    }
+
+    #reconstructComponentParentsMap() {
+        if (this._parentComponentsMap.size > 0) {
+            if (!this._parentComponentsMap.get('comp-app').namespaceURI) {
+                this.#catalogParentComponents(this.parentNode);
+            }
+        }
     }
 
     loadNewChildrenComponent(childTagName) {
@@ -170,15 +160,6 @@ export default class AVElement extends HTMLElement {
             classDefinition.default.prototype._parentComponentsMap = parentMap;
             this.#defineCustomComponent(newComp,classDefinition);
         });
-    }
-
-    #defineCustomComponent(htmlNode,classDefinition) {
-        function isComponentAlreadyDefined(name) {
-            return window.customElements.get(name);
-        }
-        if (classDefinition.default && !isComponentAlreadyDefined(htmlNode.localName)) {
-            customElements.define(htmlNode.localName,classDefinition.default);
-        }
     }
 
     getParentComponents() {

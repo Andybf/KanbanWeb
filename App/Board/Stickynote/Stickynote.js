@@ -67,9 +67,6 @@ export default class Stickynote extends AVElement{
         this.ondragend = null;
         this.stickynote.onmouseup = null;
         this.stickynote.prepend(document.createElement('comp-stickynote-options'));
-        let x = Math.round(window.innerWidth*0.166 - this.stickynote.getBoundingClientRect().x);
-        let y = Math.round(window.innerHeight*0.166 - this.stickynote.getBoundingClientRect().y);
-        this.stickynote.style['transform'] = `translate(${x}px, ${y}px)`;
         window.onkeydown = event => {this.handleWindowKeyPress(event)};
     }
 

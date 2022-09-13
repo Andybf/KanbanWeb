@@ -25,6 +25,8 @@
     --global-shadow : #9c9c9c;
     --global-font-color: #333;
     --global-font: OpenSans, arial, sans-serif;
+    --svg-color: invert(1);
+    --tone-red: #f73333;
 
     --sticky-color-yellow: #FEF4A1;
     --sticky-color-red: #FEC8C8;
@@ -47,6 +49,8 @@
     --global-shadow : #191919; 
     --global-font-color: #fff;
     --global-font: OpenSans, arial, sans-serif;
+    --svg-color: invert(0);
+    --tone-red: #f73333;
 
     --sticky-color-yellow: #e9e088;
     --sticky-color-red: #e5a9a9;

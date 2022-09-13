@@ -2,16 +2,27 @@
  * FreeWebKanban © 2022 Anderson Bucchianico. All rights reserved.
 */
 
-import AVElement from '/FreeWebKanban/modules/AVElement.js'
-export default class LoadBoard extends AVElement {
+export default class LoadBoard extends HTMLElement {
 
     loadButton;
     loadInput;
 
-    renderedCallback() {
-        this.loadButton = this.body.querySelector('button');
-        this.loadInput = this.body.querySelector('input');
+    constructor() {
+        super();
+        this.innerHTML = `
+            <button
+                class="button-option"
+                id="load-board"
+            >Load Board</button>
+            <input type="file"/>
+        `;
+    }
 
+    connectedCallback() {
+        this.compAppReference = window.document.querySelector("comp-app");
+        this.loadButton = this.querySelector('button[id="load-board"]');
+        this.loadInput = this.querySelector('input[type="file"]');
+        
         this.loadButton.onclick = () => {
             this.loadInput.click();
         };
@@ -22,7 +33,6 @@ export default class LoadBoard extends AVElement {
     }
 
     getSaveFile(input) {
-        let fileSave;
         let fileReader = new FileReader();
         fileReader.readAsText(input.target.files[0]); 
         fileReader.onload = (subEvent) => {
@@ -46,23 +56,23 @@ export default class LoadBoard extends AVElement {
 
     loadFromJson(json) {
         this.setBoardTitle(json.name);
-        this.resetBoard();
+        this.cleanBoardContent();
         this.setBoardStickers(json.columns);
     }
 
     setBoardTitle(title) {
-        this.getParentComponents().get('comp-app').body.querySelector('h2').innerText = title;
+        this.compAppReference.body.querySelector('input').value = title;
     }
 
-    resetBoard() {
-        let boardList = this.getParentComponents().get('comp-app').body.querySelector('comp-board');
+    cleanBoardContent() {
+        let boardList = this.compAppReference.body.querySelector('comp-board');
         for (let x=0; x<boardList.body.firstElementChild.children.length; x++) {
             boardList.body.firstElementChild.removeChild(boardList.body.firstElementChild.firstElementChild)
         }
     }
 
     setBoardStickers(columns) {
-        let board = this.getParentComponents().get('comp-app').body.querySelector('comp-board');
+        let board = this.compAppReference.body.querySelector('comp-board');
 
         columns.forEach( column => {
             board.insertNewColumnSlotOnBoard();

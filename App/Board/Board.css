@@ -62,7 +62,7 @@ button.column-header-button {
     width: 30px;
     max-height: 30px;
     display: none;
-    border: 1px solid red;
+    border: 1px solid var(--tone-red);
     background: url(/FreeWebKanban/images/recyclebin.svg);
     background-repeat: no-repeat;
     background-position: center;
