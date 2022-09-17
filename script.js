@@ -20,4 +20,4 @@ function initializeAVframework() {
 }
 
 initializeAVframework();
-initializeServiceWorker();
+//initializeServiceWorker();

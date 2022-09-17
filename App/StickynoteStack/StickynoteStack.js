@@ -3,7 +3,7 @@
 */
 
 import AVElement from '/FreeWebKanban/modules/AVElement.js'
-export default class StickyStack extends AVElement {
+export default class stickynoteStack extends AVElement {
 
     stickerStack;
     colorSlide;
@@ -12,19 +12,36 @@ export default class StickyStack extends AVElement {
     renderedCallback() {
         this.boardReference = this.getParentComponents().get('comp-app').body.querySelector('comp-board');
         this.stickerStack = this.body.querySelector(".stickynote-stack");
-        this.stickerStack.addEventListener('dragstart', () => {this.StackdragStart()});
-        this.stickerStack.addEventListener('dragend', () => {this.StackdragEnd()});
+        this.stickerStack.addEventListener('dragstart', (event) => {this.StackdragStart(event)});
+        this.stickerStack.addEventListener('touchstart', (event) => {this.StackTouchStart(event)});
+        this.stickerStack.addEventListener('dragend', (event) => {this.StackdragEnd(event)});
+        this.stickerStack.addEventListener('touchend', (event) => {this.StackTouchEnd(event)});
         this.initializeButtonsActions();
     }
 
-    StackdragStart() {
-        this.boardReference.insertStickynoteSlotsOnColumns();
-        this.boardReference.insertNewColumnSlotOnBoard();
-        this.stickerStack.classList.add('stickystack-empty');
+    StackTouchStart(event) {
+        event.preventDefault();
+        this.stickerStack.dispatchEvent(new Event('dragstart'));
     }
 
-    StackdragEnd() {
-        this.stickerStack.classList.remove('stickystack-empty');
+    StackdragStart(event) {
+        this.boardReference.insertStickynoteSlotsOnColumns();
+        this.boardReference.insertNewColumnSlotOnBoard();
+        this.stickerStack.classList.add('stickynoteStack-empty');
+    }
+
+    StackTouchEnd(event) {
+        Array.from(this.boardReference.body.querySelectorAll("li.slot")).forEach((item) => {
+            if(this.boardReference.calculateEventTouchHitbox(event, item)) {
+                event.preventDefault();
+                item.dispatchEvent(new Event('drop'));
+            }
+        });
+        this.stickerStack.dispatchEvent(new Event('dragend'));
+    }
+
+    StackdragEnd(event) {
+        this.stickerStack.classList.remove('stickynoteStack-empty');
         this.boardReference.removeExistingColumnSlots();
         this.boardReference.removeExistingStickynoteSlots();
     }
@@ -42,11 +59,11 @@ export default class StickyStack extends AVElement {
     handleButtonClick(event) {
         const attribute = event.target.dataset['attr'];
         const value = event.target.dataset['value'];
-        this.applyOptionsOnStickyStack(attribute, value);
+        this.applyOptionsOnstickynoteStack(attribute, value);
         this.updateSelectedOption(event);
     }
 
-    applyOptionsOnStickyStack(attribute, value) {
+    applyOptionsOnstickynoteStack(attribute, value) {
         this.stickerStack.style[attribute] = value;
     }
 

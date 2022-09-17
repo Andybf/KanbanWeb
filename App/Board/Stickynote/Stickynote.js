@@ -7,7 +7,7 @@ import AVElement from "/FreeWebKanban/modules/AVElement.js";
 export default class Stickynote extends AVElement{
 
     boardReference;
-    stickyStackReference;
+    stickynoteStackReference;
     recyclebinReference;
     stickynote;
 
@@ -18,9 +18,9 @@ export default class Stickynote extends AVElement{
         this.darkBackground = this.body.querySelector('.dark-background');
         this.ondragstart = event => {this.stickynoteDragStart(event)};
         this.ondragend = event => {this.stickynoteDragEnd(event)};
-        this.stickynote.onmouseup = event => {this.activateStickerOptions(event);}
+        this.stickynote.onmouseup = event => {this.expandStickynote(event);}
         this.darkBackground.addEventListener('click', event => {
-            this.deactivateStickerOptions(event)
+            this.retractStickynote(event);
         });
         this.generateColorForSticker();
         this.generateContentForSticker();
@@ -55,7 +55,7 @@ export default class Stickynote extends AVElement{
         this.boardReference.removeExistingStickynoteSlots();
     }
 
-    activateStickerOptions() {
+    expandStickynote() {
         this.stickynote.classList.add('stickynote-content-expanded');
         this.body.querySelector('.dark-background').style.display = 'unset';
         setTimeout(() => {
@@ -70,14 +70,14 @@ export default class Stickynote extends AVElement{
         window.onkeydown = event => {this.handleWindowKeyPress(event)};
     }
 
-    deactivateStickerOptions() {
+    retractStickynote() {
         this.stickynote.classList.remove('stickynote-content-expanded');
         this.stickynote.style['transform'] = this.stickynoteRotation;
         this.stickynote.style['position'] = 'absolute';
         setTimeout(() => {
             this.stickynote.style['position'] = null;
         },330);
-        this.stickynote.onmouseup = event => {this.activateStickerOptions(event);}
+        this.stickynote.onmouseup = event => {this.expandStickynote(event);}
         this.stickynote.removeChild(this.stickynote.firstElementChild);
         this.darkBackground.classList.remove('background-blur');
         this.darkBackground.style = null;
@@ -89,7 +89,7 @@ export default class Stickynote extends AVElement{
 
     handleWindowKeyPress(event) {
         if (event.key == 'Escape') {
-            this.deactivateStickerOptions();
+            this.retractStickynote();
         }
     }
 }

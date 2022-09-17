@@ -7,10 +7,10 @@ export default class Board extends AVElement {
 
     boardList;
     currentOnDragStickyNote;
-    stickyStackReference;
+    stickynoteStackReference;
 
     connectedCallback() {
-        this.stickyStackReference = this.getParentComponents().get('comp-app').body.querySelector("comp-sticky-stack");
+        this.stickynoteStackReference = this.getParentComponents().get('comp-app').body.querySelector("comp-stickynote-stack");
     }
 
     renderedCallback() {
@@ -32,7 +32,7 @@ export default class Board extends AVElement {
         let listItem = target.lastElementChild;
         this.deactivateStickerSlot(listItem);
         listItem.appendChild(compStickerNote);
-        this.stickyStackReference.body.querySelectorAll(".selected").forEach(element => {
+        this.stickynoteStackReference.body.querySelectorAll(".selected").forEach(element => {
             compStickerNote.setAttribute(element.dataset['attr'], element.dataset['value']);
         });
         compStickerNote.setAttribute('textvalue','Type something here...');
@@ -104,5 +104,13 @@ export default class Board extends AVElement {
         event.target.parentElement.parentElement.parentElement.removeChild(
             event.target.parentElement.parentElement
         );
+    }
+
+    calculateEventTouchHitbox(event, item) {
+        const x = event.changedTouches.item(0).clientX;
+        const y = event.changedTouches.item(0).clientY;
+        const box = item.getBoundingClientRect();
+        return (x > box.x && x < box.x+box.width) &&
+               (y > box.y && y < box.y+box.height)
     }
 }

@@ -31,8 +31,8 @@
     cursor: initial;
     transform: none !important;
 }
-.stickynote-content-expanded > textarea {
-    cursor: initial;
+.stickynote-content-expanded > article {
+    overflow: auto;
 }
 
 .stickynote-content-expanded > div {
