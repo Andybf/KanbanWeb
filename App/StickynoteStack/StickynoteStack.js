@@ -3,7 +3,7 @@
 */
 
 import AVElement from '/FreeWebKanban/modules/AVElement.js'
-export default class stickynoteStack extends AVElement {
+export default class StickynoteStack extends AVElement {
 
     stickerStack;
     colorSlide;
