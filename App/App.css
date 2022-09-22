@@ -62,7 +62,6 @@ footer {
     width: calc(100% - 2rem);
     position: fixed;
     bottom: 0;
-    pointer-events: none;
     z-index: 200;
 }
 

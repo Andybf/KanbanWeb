@@ -78,7 +78,7 @@ export default class LoadBoard extends HTMLElement {
             board.insertNewColumnSlotOnBoard();
             let columnitem = board.body.querySelector('li.column-item:last-child');            
             board.convertColumnSlotToColumn(columnitem);
-            columnitem.querySelector('h3').innerText = column.title;
+            columnitem.querySelector('input').innerText = column.title;
 
             column.stickers.forEach( sticker => {
                 let stickerSlot = document.createElement("li");;

@@ -9,6 +9,7 @@ export default class Stickynote extends AVElement{
     boardReference;
     stickynoteStackReference;
     recyclebinReference;
+    isUserTouchMoving;
     stickynote;
 
     renderedCallback() {
@@ -17,7 +18,10 @@ export default class Stickynote extends AVElement{
         this.stickynote = this.body.querySelector('div');
         this.darkBackground = this.body.querySelector('.dark-background');
         this.ondragstart = event => {this.stickynoteDragStart(event)};
+        this.ontouchstart = event => {this.stickynoteTouchStart(event)};
+        this.ontouchmove = event => {this.stickynoteTouchMove(event)};
         this.ondragend = event => {this.stickynoteDragEnd(event)};
+        this.ontouchend = event => {this.stickynoteTouchEnd(event)};
         this.stickynote.onmouseup = event => {this.expandStickynote(event);}
         this.darkBackground.addEventListener('click', event => {
             this.retractStickynote(event);
@@ -49,10 +53,33 @@ export default class Stickynote extends AVElement{
         this.boardReference.insertNewColumnSlotOnBoard();
     }
 
+    stickynoteTouchStart(event) {
+        this.isUserTouchMoving = true;
+    }
+
+    stickynoteTouchMove(event) {
+        event.preventDefault();
+        if (this.isUserTouchMoving) {
+            this.isUserTouchMoving = false;
+            this.dispatchEvent(new Event('dragstart'));
+        }
+    }
+
     stickynoteDragEnd() {
         this.recyclebinReference.deactivateRecycleBin();
         this.boardReference.removeExistingColumnSlots();
         this.boardReference.removeExistingStickynoteSlots();
+    }
+
+    stickynoteTouchEnd(event) {
+        this.isUserTouchMoving = false;
+        Array.from(this.boardReference.body.querySelectorAll("li.slot")).forEach((item) => {
+            if(this.boardReference.calculateEventTouchHitbox(event, item)) {
+                event.preventDefault();
+                item.dispatchEvent(new Event('drop'));
+            }
+        });
+        this.dispatchEvent(new Event('dragend'));
     }
 
     expandStickynote() {
@@ -84,6 +111,7 @@ export default class Stickynote extends AVElement{
         this.body.firstElementChild.setAttribute('draggable', true);
         this.body.firstElementChild.setAttribute('hoverEffect', true);
         this.ondragstart = event => {this.stickynoteDragStart(event)};
+        this.ontouchstart = event => {this.stickynoteTouchStart(event)};
         this.ondragend = event => {this.stickynoteDragEnd(event)};
     }
 

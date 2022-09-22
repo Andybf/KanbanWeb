@@ -11,7 +11,6 @@ button#button-menu {
     padding: 0 1rem;
     user-select: none;
     height: 30px;
-    width: 128px;
     font-size: 11pt;
     display: flex;
     align-items: center;
@@ -28,18 +27,24 @@ div.menu-list-container {
 }
 
 ul#menu-list{
+    display: flex;
     background-color: var(--interface-background);
-    row-gap: 1rem;
+    row-gap: 0.33rem;
     list-style: none;
-    padding: 6px;
+    padding: 0.5rem 0.5rem 1.5rem 0.5rem;
     border-radius: 5px;
     box-shadow: 2px 2px 4px var(--global-shadow);
-    position: relative;
     z-index: 1001;
+    position: fixed;
+    right: 6px;
+    width: 192px;
+    align-items: stretch;
+    flex-direction: column;
 }
 
-hr {
-    width: 100%;
+span.menu-subtitle {
+    padding: 1rem 0rem;
+    font-size: 9pt;
 }
 
 div.list-background {
@@ -53,7 +58,6 @@ div.list-background {
 
 button.button-option {
     border: none;
-    border-radius: 5px;
     background: transparent;
     color: var(--global-font-color);
     cursor: pointer;
@@ -62,6 +66,8 @@ button.button-option {
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
 }
 button.button-option:hover {
     background-color: var(--global-background-color);
@@ -83,21 +89,20 @@ input[type='file'] {
         width: min-content;
     }
 
-    button#button-menu > span{
-        display: none;
-    }
-
     ul#menu-list {
         display: flex;
         position: absolute;
         right: 0;
-        padding: 1rem;
+        padding: 1rem 1rem 3rem 1rem;
         width: calc(100% - 2rem);
         flex-direction: column;
     }
 
     button.button-option {
-        background-color: var(--global-background-color);
         padding: 1rem;
+    }
+
+    span.menu-subtitle {
+        padding: 1rem 0rem;
     }
 }

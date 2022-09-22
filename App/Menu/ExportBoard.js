@@ -8,7 +8,7 @@ export default class ChangeTheme extends HTMLElement {
         `<button
             class='button-option'
             id="button-export"
-        >Export</button>`;
+        >Export Board</button>`;
     }
 
     connectedCallback() {

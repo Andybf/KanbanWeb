@@ -1,14 +1,18 @@
 section {
     display: flex;
-    row-gap: 10px;
-    width: 270px;
+    align-items: flex-end;
+}
+
+div.stickynote-container {
+    display: flex;
     justify-content: space-between;
     align-content: center;
     box-shadow: 0 0 10px 3px var(--global-shadow);
     border-radius: 0 10rem 0 0;
-    padding: 10px;
+    padding: 20px;
     pointer-events: all;
     background: var(--interface-background);
+    align-items: flex-end;
 }
 
 .stickynote-stack {
@@ -22,7 +26,7 @@ section {
     text-align: center;
     font-size: 20px;
     margin: auto;
-    padding: 10px;
+    padding: 3px;
     transition: 0.33s;
     user-select: none;
 }
@@ -39,13 +43,17 @@ section {
 
 .option-buttons {
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+    background: var(--interface-background);
+    box-shadow: 5px 0px 5px 1px var(--global-shadow);
+    padding: 15px;
+    border-radius: 0px 30px 0px 0px;
+    position: relative;
+    left: -8px;
 }
 
 .option-buttons > button {
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border: none;
     margin: 1px;
     cursor: pointer;

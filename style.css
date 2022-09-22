@@ -11,6 +11,57 @@
 @font-face {
     font-family: OpenSans; src: url('../Media/font/OpenSans-Semibold.ttf');
 }
+@media (prefers-color-scheme: light) {
+    .dynamic-theme {
+        --global-background-color : #eee;
+        --global-background-brightness : blur(10px) brightness(1.0);
+        --interface-background: #FFFFFF;
+        --terciary-color : #9a9a9a; 
+        --transparent-backgorund : #FFFFFF69;
+        --button-background : #ffffff;
+        --button-background-hover : #dadada;
+        --window-header-background : linear-gradient(#eee,#ccc);
+        --global-border: #e0e0e0;
+        --global-shadow : #9c9c9c;
+        --global-font-color: #333;
+        --global-font: OpenSans, arial, sans-serif;
+        --svg-color: invert(1);
+        --tone-red: #f73333;
+    
+        --sticky-color-yellow: #FEF4A1;
+        --sticky-color-red: #FEC8C8;
+        --sticky-color-green: #b3fea4;
+        --sticky-color-blue: #aef3f3;
+        --sticky-color-purple: #b7c9fd;
+        --sticky-color-grey: #EEEEEE;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .dynamic-theme {
+        --global-background-color : #2f2f2f;
+        --global-background-brightness : blur(10px) brightness(0.5);
+        --interface-background: #353535;
+        --terciary-color : #adadad; 
+        --transparent-backgorund : #00000069;
+        --button-background : #403e3ecc;
+        --button-background-hover : #656565d1;
+        --window-header-background : linear-gradient(#555,#333);
+        --global-border: #000000;
+        --global-shadow : #191919; 
+        --global-font-color: #fff;
+        --global-font: OpenSans, arial, sans-serif;
+        --svg-color: invert(0);
+        --tone-red: #f73333;
+    
+        --sticky-color-yellow: #e9e088;
+        --sticky-color-red: #e5a9a9;
+        --sticky-color-green: #93df84;
+        --sticky-color-blue: #92dddd;
+        --sticky-color-purple: #9aace3;
+        --sticky-color-grey: #EEEEEE;
+    }
+}
 
 .light-theme {
     --global-background-color : #eee;

@@ -26,6 +26,7 @@
     width: 66.66%;
     height: 66.66%;
     left: calc(66.66% - 50%);
+    top: calc(66.66% - 50%);
     flex-direction: column;
     position: absolute;
     cursor: initial;
