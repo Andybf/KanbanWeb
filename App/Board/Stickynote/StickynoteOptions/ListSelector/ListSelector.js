@@ -43,7 +43,7 @@ export default class ListSelector extends AVElement {
 
     sendItemEventToParent(event) {
         const parent = this.getParentComponent('stickynote-options');
-        parent.handleInputFromSelectionList(event, this.sourceName);
+        parent.handleInputFromSelectionList(event, this.getParentComponent('stickynote'), this.sourceName);
     }
 
     generateBackground() {

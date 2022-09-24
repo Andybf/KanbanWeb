@@ -39,7 +39,7 @@ export default class BrowserSave extends HTMLElement {
                 });
             });
             content.columns.push({
-                'title' : element.querySelector("h3").innerText,
+                'title' : element.querySelector("input").innerText,
                 'stickers' : stickerList
             });
         });
