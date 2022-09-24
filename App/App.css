@@ -56,10 +56,8 @@ section.board-container {
 }
 
 footer {
-    width: 100%;
     position: fixed;
     bottom: 0;
-    z-index: 200;
 }
 
 /* Mobile =================================================================== */
@@ -86,5 +84,6 @@ footer {
     footer {
         display: flex;
         justify-content: center;
+        width: 100%;
     }
 }
