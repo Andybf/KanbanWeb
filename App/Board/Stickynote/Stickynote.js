@@ -13,8 +13,8 @@ export default class Stickynote extends AVElement{
     stickynote;
 
     renderedCallback() {
-        this.boardReference = this.getParentComponents().get('comp-board');
-        this.recyclebinReference = this.getParentComponents().get('comp-app').body.querySelector("comp-recyclebin");
+        this.boardReference = this.getParentComponent('board');
+        this.recyclebinReference = this.getParentComponent('app').getChildComponent('control-panel').getChildComponent('recyclebin');
         this.stickynote = this.body.querySelector('div');
         this.darkBackground = this.body.querySelector('.dark-background');
         this.ondragstart = event => {this.stickynoteDragStart(event)};
@@ -79,6 +79,10 @@ export default class Stickynote extends AVElement{
                 item.dispatchEvent(new Event('drop'));
             }
         });
+        if(this.boardReference.calculateEventTouchHitbox(event, this.recyclebinReference)){
+            event.preventDefault();
+            this.recyclebinReference.dispatchEvent(new Event('drop'));
+        }
         this.dispatchEvent(new Event('dragend'));
     }
 

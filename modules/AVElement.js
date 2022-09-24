@@ -8,7 +8,7 @@ import AVutils from './AVutils.js'
 
 export default class AVElement extends HTMLElement {
 
-    #childrenComponentList = [];
+    #childrenComponentList = new Map();
     #componentpath = '';
 
     constructor() {
@@ -115,7 +115,7 @@ export default class AVElement extends HTMLElement {
     #catalogChildrenComponents() {
         this.body.querySelectorAll("*").forEach( componentNode => {
             if (componentNode.tagName.includes("COMP-")){
-                this.#childrenComponentList.push(componentNode);
+                this.#childrenComponentList.set(componentNode.localName, componentNode);
             }
         })
     }
@@ -156,18 +156,24 @@ export default class AVElement extends HTMLElement {
         let className = this.#constructComponentClassName(newComp);
         import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
             let parentMap = new Map([[this.localName, {localName: this.localName} ]]);
-            AVutils.concatMaps(parentMap, this.getParentComponents());
+            AVutils.concatMaps(parentMap, this._parentComponentsMap);
             classDefinition.default.prototype._parentComponentsMap = parentMap;
             this.#defineCustomComponent(newComp,classDefinition);
         });
     }
 
-    getParentComponents() {
-        return this._parentComponentsMap;
+    getParentComponent(localName) {
+        if(!localName.includes('comp-')) {
+            localName = `comp-${localName}`;
+        }
+        return this._parentComponentsMap.get(localName);
     }
 
-    getChildrenComponents() {
-        return this.#childrenComponentList;
+    getChildComponent(localName) {
+        if(!localName.includes('comp-')) {
+            localName = `comp-${localName}`;
+        }
+        return this.#childrenComponentList.get(localName);
     }
 
     renderedCallback(){}

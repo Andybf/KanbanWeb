@@ -2,18 +2,19 @@ section#recyclebin-container {
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-direction: alternate-reverse;
-    width: 200px;
-    height: 150px;
+    height: 70px;
+    width: 90px;
     display: flex;
     justify-content: center;
     box-shadow: inset 0 0 4px 3px var(--tone-red);
     display: none;
     pointer-events: all;
-}
 
-section#recyclebin-container > img {
-    width: 80px;
-    pointer-events: none;
+    background: url(/FreeWebKanban/images/recyclebin.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    border-radius: 5px;
 }
 
 @keyframes sparkling {

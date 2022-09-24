@@ -66,7 +66,7 @@
 .light-theme {
     --global-background-color : #eee;
     --global-background-brightness : blur(10px) brightness(1.0);
-    --interface-background: #FFFFFFC0;
+    --interface-background: #FFFFFF;
     --terciary-color : #9a9a9a; 
     --transparent-backgorund : #FFFFFF69;
     --button-background : #ffffff;

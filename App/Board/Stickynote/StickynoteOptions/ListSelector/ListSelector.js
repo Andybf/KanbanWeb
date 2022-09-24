@@ -42,7 +42,7 @@ export default class ListSelector extends AVElement {
     }
 
     sendItemEventToParent(event) {
-        const parent = this.getParentComponents().get('comp-stickynote-options');
+        const parent = this.getParentComponent('stickynote-options');
         parent.handleInputFromSelectionList(event, this.sourceName);
     }
 
@@ -54,7 +54,7 @@ export default class ListSelector extends AVElement {
     }
 
     sendMessageToDestructMenu(event){
-        const parent = this.getParentComponents().get('comp-stickynote-options');
+        const parent = this.getParentComponent('stickynote-options');
         parent.destroyMenu(this);
     }
 }

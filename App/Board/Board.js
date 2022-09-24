@@ -7,10 +7,10 @@ export default class Board extends AVElement {
 
     boardList;
     currentOnDragStickyNote;
-    stickynoteStackReference;
+    controlPanelReference;
 
     connectedCallback() {
-        this.stickynoteStackReference = this.getParentComponents().get('comp-app').body.querySelector("comp-stickynote-stack");
+        this.controlPanelReference = this.getParentComponent('app').getChildComponent("control-panel");
     }
 
     renderedCallback() {
@@ -32,7 +32,7 @@ export default class Board extends AVElement {
         let listItem = target.lastElementChild;
         this.deactivateStickerSlot(listItem);
         listItem.appendChild(compStickerNote);
-        this.stickynoteStackReference.body.querySelectorAll(".selected").forEach(element => {
+        this.controlPanelReference.body.querySelectorAll(".selected").forEach(element => {
             compStickerNote.setAttribute(element.dataset['attr'], element.dataset['value']);
         });
         compStickerNote.setAttribute('textvalue','Type something here...');

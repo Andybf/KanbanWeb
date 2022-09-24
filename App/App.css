@@ -56,10 +56,7 @@ section.board-container {
 }
 
 footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: calc(100% - 2rem);
+    width: 100%;
     position: fixed;
     bottom: 0;
     z-index: 200;
@@ -84,5 +81,10 @@ footer {
     .header-node {
         width: max-content;
         flex-grow: 1;
+    }
+
+    footer {
+        display: flex;
+        justify-content: center;
     }
 }

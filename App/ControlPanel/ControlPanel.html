@@ -1,7 +1,18 @@
 <section>
-    <div class="stickynote-container">
-        <div class="stickynote-stack" draggable="true">drag-me on the board</div>
+    <div class="control-panel-container">
+        <div id="stickynote-stack-container">
+            <div class="stickynote-back"></div>
+            <div class="stickynote-stack" draggable="true">
+                <span>lorem ipsum</span>
+                <span>dolor sim amet</span>
+                <span>consectetur adipiscing</span>
+            </div>
+        </div>
+        <div id="recyclebin-container">
+            <comp-recyclebin></comp-recyclebin>
+        </div>
     </div>
+    
     <div class="option-buttons">
         <button
             class="color-button"

@@ -3,14 +3,14 @@
 */
 
 import AVElement from '/FreeWebKanban/modules/AVElement.js'
-export default class StickynoteStack extends AVElement {
+export default class ControlPanel extends AVElement {
 
     stickerStack;
     colorSlide;
     boardReference;
 
     renderedCallback() {
-        this.boardReference = this.getParentComponents().get('comp-app').body.querySelector('comp-board');
+        this.boardReference = this.getParentComponent('app').getChildComponent('board');
         this.stickerStack = this.body.querySelector(".stickynote-stack");
         this.stickerStack.addEventListener('dragstart', (event) => {this.StackdragStart(event)});
         this.stickerStack.addEventListener('touchstart', (event) => {this.StackTouchStart(event)});
@@ -27,7 +27,8 @@ export default class StickynoteStack extends AVElement {
     StackdragStart(event) {
         this.boardReference.insertStickynoteSlotsOnColumns();
         this.boardReference.insertNewColumnSlotOnBoard();
-        this.stickerStack.classList.add('stickynoteStack-empty');
+        this.stickerStack.classList.add('stickynote-stack-empty');
+        this.body.querySelector('.stickynote-back').style.display = 'none';
     }
 
     StackTouchEnd(event) {
@@ -41,7 +42,8 @@ export default class StickynoteStack extends AVElement {
     }
 
     StackdragEnd(event) {
-        this.stickerStack.classList.remove('stickynoteStack-empty');
+        this.stickerStack.classList.remove('stickynote-stack-empty');
+        this.body.querySelector('.stickynote-back').style.display = null;
         this.boardReference.removeExistingColumnSlots();
         this.boardReference.removeExistingStickynoteSlots();
     }
@@ -65,6 +67,7 @@ export default class StickynoteStack extends AVElement {
 
     applyOptionsOnstickynoteStack(attribute, value) {
         this.stickerStack.style[attribute] = value;
+        this.body.querySelector('.stickynote-back').style[attribute] = value;
     }
 
     updateSelectedOption(event) {
