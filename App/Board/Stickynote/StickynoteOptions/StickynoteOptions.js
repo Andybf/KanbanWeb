@@ -82,7 +82,8 @@ export default class StickynoteOptions extends AVElement {
         this.buttons.stickyColor.onclick = event => {this.openMenuSelection(event)};
     }
 
-    executeCommand(value, arg) { /* Obsolete */
+    /* Obsolete: This feature can be removed at any browser version in the future */
+    executeCommand(value, arg) {
         document.execCommand(value,false, arg);
     }
 

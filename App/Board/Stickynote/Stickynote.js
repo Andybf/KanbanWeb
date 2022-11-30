@@ -38,6 +38,7 @@ export default class Stickynote extends AVElement{
     }
 
     generateContentForSticker() {
+        this.body.querySelector('input').value = this.attributes['stickynote-title'].nodeValue;
         this.body.querySelector('article').innerHTML = this.attributes['textvalue'].nodeValue;
     }
 
@@ -102,6 +103,7 @@ export default class Stickynote extends AVElement{
     }
 
     retractStickynote() {
+        this.stickynote.querySelector('span').innerText = this.stickynote.querySelector("input").value;
         this.stickynote.classList.remove('stickynote-content-expanded');
         this.stickynote.style['transform'] = this.stickynoteRotation;
         this.stickynote.style['position'] = 'absolute';

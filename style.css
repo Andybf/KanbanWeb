@@ -17,7 +17,8 @@
         --global-background-brightness : blur(10px) brightness(1.0);
         --interface-background: #FFFFFF;
         --terciary-color : #9a9a9a; 
-        --transparent-backgorund : #FFFFFF69;
+        --opaque-backgorund : #FFFFFF69;
+        --transparent-backgorund : #FFFFFF49;
         --button-background : #ffffff;
         --button-background-hover : #dadada;
         --window-header-background : linear-gradient(#eee,#ccc);
@@ -43,7 +44,8 @@
         --global-background-brightness : blur(10px) brightness(0.5);
         --interface-background: #353535;
         --terciary-color : #adadad; 
-        --transparent-backgorund : #00000069;
+        --opaque-backgorund : #00000069;
+        --transparent-backgorund : #00000049;
         --button-background : #403e3ecc;
         --button-background-hover : #656565d1;
         --window-header-background : linear-gradient(#555,#333);
@@ -68,7 +70,8 @@
     --global-background-brightness : blur(10px) brightness(1.0);
     --interface-background: #FFFFFF;
     --terciary-color : #9a9a9a; 
-    --transparent-backgorund : #FFFFFF69;
+    --opaque-backgorund : #FFFFFF69;
+    --transparent-backgorund : #FFFFFF49;
     --button-background : #ffffff;
     --button-background-hover : #dadada;
     --window-header-background : linear-gradient(#eee,#ccc);
@@ -92,7 +95,8 @@
     --global-background-brightness : blur(10px) brightness(0.5);
     --interface-background: #353535;
     --terciary-color : #adadad; 
-    --transparent-backgorund : #00000069;
+    --opaque-backgorund : #00000069;
+    --transparent-backgorund : #00000049;
     --button-background : #403e3ecc;
     --button-background-hover : #656565d1;
     --window-header-background : linear-gradient(#555,#333);

@@ -67,7 +67,7 @@ export default class LoadBoard extends HTMLElement {
     cleanBoardContent() {
         let boardList = this.compAppReference.body.querySelector('comp-board');
         for (let x=0; x<boardList.body.firstElementChild.children.length; x++) {
-            boardList.body.firstElementChild.removeChild(boardList.body.firstElementChild.firstElementChild)
+            boardList.body.firstElementChild.removeChild(boardList.body.firstElementChild.firstElementChild);
         }
     }
 
@@ -78,16 +78,17 @@ export default class LoadBoard extends HTMLElement {
             board.insertNewColumnSlotOnBoard();
             let columnitem = board.body.querySelector('li.column-item:last-child');            
             board.convertColumnSlotToColumn(columnitem);
-            columnitem.querySelector('input').innerText = column.title;
+            columnitem.querySelector('input').innerText = column['column-title'];
 
-            column.stickers.forEach( sticker => {
+            column.stickers.forEach( databseSticker => {
                 let stickerSlot = document.createElement("li");;
                 stickerSlot.className = "sticker-item";
                 columnitem.lastElementChild.appendChild(stickerSlot);
                 board.createNewStickernoteOnColumnList(columnitem.lastElementChild);
-                let createdSticky =  columnitem.lastElementChild.lastElementChild.querySelector('comp-stickynote');
-                createdSticky.setAttribute('background-color', sticker['background-color']);
-                createdSticky.setAttribute('textValue', sticker['content']);
+                let createdStickynote =  columnitem.lastElementChild.lastElementChild.querySelector('comp-stickynote');
+                createdStickynote.setAttribute('stickynote-title', databseSticker['stickynote-title'])
+                createdStickynote.setAttribute('background-color', databseSticker['background-color']);
+                createdStickynote.setAttribute('textValue', databseSticker['content']);
             });
         });
     }

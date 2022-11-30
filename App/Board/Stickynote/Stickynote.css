@@ -32,23 +32,51 @@
     cursor: initial;
     transform: none !important;
 }
+.stickynote-content-expanded > span {
+    display: none;
+}
+.stickynote-content-expanded > input[type="text"] {
+    display: unset;
+}
 .stickynote-content-expanded > article {
     overflow: auto;
+    display: unset;
 }
 
 .stickynote-content-expanded > div {
     display: flex;
 }
 
+span {
+    width: inherit;
+    padding: 1rem;
+}
+
+input[type="text"]::placeholder {
+    color: var(--global-font-color);
+    filter: opacity(0.50);
+}
+input[type="text"] {
+    display: none;
+    border: none;
+    height: 60px;
+    padding: 5px 1rem;
+    width: -webkit-fill-available;
+    background: var(--transparent-backgorund);
+    color: var(--global-font-color);
+    font-size: 18pt;
+}
+
 article {
     background: no-repeat;
+    display: none;
     border: none;
     resize: none;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
     padding: 2rem;
     outline: none;
-}
+} 
 
 .dark-background {
     display: none;

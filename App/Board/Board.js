@@ -35,6 +35,7 @@ export default class Board extends AVElement {
         this.controlPanelReference.body.querySelectorAll(".selected").forEach(element => {
             compStickerNote.setAttribute(element.dataset['attr'], element.dataset['value']);
         });
+        compStickerNote.setAttribute('stickynote-title','');
         compStickerNote.setAttribute('textvalue','Type something here...');
     }
 

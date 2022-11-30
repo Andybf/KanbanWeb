@@ -34,12 +34,13 @@ export default class BrowserSave extends HTMLElement {
             let stickerList = [];
             Array.from(element.querySelector("ul").children).forEach( item => {
                 stickerList.push({
-                    'content' : item.firstElementChild.body.querySelector('div').firstElementChild.innerHTML,
+                    'stickynote-title' : item.firstElementChild.body.querySelector('input').value,
+                    'content' : item.firstElementChild.body.querySelector('article').innerHTML,
                     'background-color' : item.firstElementChild.attributes['background-color'].nodeValue
                 });
             });
             content.columns.push({
-                'title' : element.querySelector("input").innerText,
+                'column-title' : element.querySelector("input").value,
                 'stickers' : stickerList
             });
         });
