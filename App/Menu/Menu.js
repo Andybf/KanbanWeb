@@ -16,7 +16,7 @@ export default class Menu extends AVElement {
         import('/FreeWebKanban/App/Menu/LoadBoard.js').then( ( appClassDefinition) => {
             customElements.define("mod-load-board", appClassDefinition.default);
         });
-        import('/FreeWebKanban/App/Menu/BrowserSave.js').then( ( appClassDefinition) => {
+        import('/FreeWebKanban/App/Menu/QuickSave.js').then( ( appClassDefinition) => {
             customElements.define("mod-browser-save", appClassDefinition.default);
         });
         import('/FreeWebKanban/App/Menu/ExportBoard.js').then( ( appClassDefinition) => {
@@ -24,6 +24,9 @@ export default class Menu extends AVElement {
         });
         import('/FreeWebKanban/App/Menu/ChangeTheme.js').then( ( appClassDefinition) => {
             customElements.define("mod-change-theme", appClassDefinition.default);
+        });
+        import('/FreeWebKanban/App/Menu/AutoSave.js').then( ( appClassDefinition) => {
+            customElements.define("mod-auto-save", appClassDefinition.default);
         });
     }
 

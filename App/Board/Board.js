@@ -2,7 +2,9 @@
  * FreeWebKanban © 2022 Anderson Bucchianico. All rights reserved.
 */
 
-import AVElement from '/FreeWebKanban/modules/AVElement.js'
+import AVElement from '/FreeWebKanban/modules/AVElement.js';
+import BrowserSave from "/FreeWebKanban/modules/BrowserSave.js";
+
 export default class Board extends AVElement {
 
     boardList;
@@ -25,6 +27,7 @@ export default class Board extends AVElement {
         } else {
             this.createNewStickernoteOnColumnList(event.target.parentElement);
         }
+        BrowserSave.checkAutoSave();
     }
 
     createNewStickernoteOnColumnList(target) {
@@ -45,6 +48,7 @@ export default class Board extends AVElement {
             stickerSlot.ondrop = event => {this.dropOnStickynoteSlot(event)};
             column.querySelector("ul").appendChild(stickerSlot);
         }
+        BrowserSave.checkAutoSave();
     }
 
     insertNewColumnSlotOnBoard() {
@@ -53,6 +57,7 @@ export default class Board extends AVElement {
         newColumn.ondragover = event => {event.preventDefault()};
         newColumn.ondrop = event => {this.columnDrop(event)};
         this.body.querySelector("ul.column-list").appendChild(newColumn);
+        BrowserSave.checkAutoSave();
     }
 
     removeExistingColumnSlots() {
@@ -103,6 +108,7 @@ export default class Board extends AVElement {
         event.target.parentElement.parentElement.parentElement.removeChild(
             event.target.parentElement.parentElement
         );
+        BrowserSave.checkAutoSave();
     }
 
     calculateEventTouchHitbox(event, item) {

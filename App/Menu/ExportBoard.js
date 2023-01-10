@@ -1,4 +1,4 @@
-import SaveBoard from "./BrowserSave.js";
+import BrowserSave from "/FreeWebKanban/modules/BrowserSave.js";
 
 export default class ChangeTheme extends HTMLElement {
 
@@ -18,7 +18,7 @@ export default class ChangeTheme extends HTMLElement {
     }
 
     saveOnClientComputer() {
-        const content = SaveBoard.generateBoardDataJson(window.document.querySelector("comp-app"));
+        const content = BrowserSave.generateBoardDataJson(window.document.querySelector("comp-app"));
         let fileName = `${content.name}.json`;
         let url = this.generateDownloadAddress(JSON.stringify(content,null,4));
         let alink = this.generateLinkOnPage(url,fileName);

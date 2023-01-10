@@ -3,6 +3,7 @@
 */
 
 import AVElement from "/FreeWebKanban/modules/AVElement.js";
+import BrowserSave from "/FreeWebKanban/modules/BrowserSave.js";
 
 export default class Stickynote extends AVElement{
 
@@ -113,6 +114,7 @@ export default class Stickynote extends AVElement{
         this.ondragstart = event => {this.stickynoteDragStart(event)};
         this.ontouchstart = event => {this.stickynoteTouchStart(event)};
         this.ondragend = event => {this.stickynoteDragEnd(event)};
+        BrowserSave.checkAutoSave();
     }
 
     handleWindowKeyPress(event) {

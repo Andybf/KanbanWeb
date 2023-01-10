@@ -1,21 +1,12 @@
-export default class BrowserSave extends HTMLElement {
+export default class BrowserSave {
 
-    constructor() {
-        super();
-        this.innerHTML = 
-        `<button
-            class='button-option'
-            id="button-save"
-        >Quick Save</button>`;
+    static checkAutoSave() {
+        if (window.document.documentElement.getAttribute('auto-save') == 'true') {
+            BrowserSave.saveOnBrowserStorage();
+        }
     }
 
-    connectedCallback() {
-        this.querySelector("#button-save").addEventListener("click",
-            (event) => {this.saveOnBrowserStorage(event)
-        });
-    }
-
-    saveOnBrowserStorage() {
+    static saveOnBrowserStorage() {
         if (window.localStorage) {
             const content = BrowserSave.generateBoardDataJson(window.document.querySelector("comp-app"));
             window.localStorage.lastSave = JSON.stringify(content,null,4);
