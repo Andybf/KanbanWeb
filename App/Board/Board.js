@@ -57,7 +57,6 @@ export default class Board extends AVElement {
         newColumn.ondragover = event => {event.preventDefault()};
         newColumn.ondrop = event => {this.columnDrop(event)};
         this.body.querySelector("ul.column-list").appendChild(newColumn);
-        BrowserSave.checkAutoSave();
     }
 
     removeExistingColumnSlots() {
@@ -82,7 +81,10 @@ export default class Board extends AVElement {
         let listItem = document.importNode(this.body.querySelector("template#column-content").content,true);
         listItem.querySelector("#recycle-button").addEventListener('click', event => {this.deleteColumn(event)});
         column.appendChild(listItem);
-        this.deactivateStickerSlot(column);        
+        this.deactivateStickerSlot(column);
+        column.querySelector("input[class='column-title']").addEventListener("change", 
+            (event) => {BrowserSave.checkAutoSave(event);}
+        );     
     }
 
     columnDrop(event) {
