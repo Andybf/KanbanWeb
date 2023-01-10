@@ -78,7 +78,7 @@ export default class LoadBoard extends HTMLElement {
             board.insertNewColumnSlotOnBoard();
             let columnitem = board.body.querySelector('li.column-item:last-child');            
             board.convertColumnSlotToColumn(columnitem);
-            columnitem.querySelector('input').innerText = column['column-title'];
+            columnitem.querySelector('input[class="column-title"]').value = column['column-title'];
 
             column.stickers.forEach( databseSticker => {
                 let stickerSlot = document.createElement("li");;
