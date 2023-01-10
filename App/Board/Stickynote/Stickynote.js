@@ -27,7 +27,6 @@ export default class Stickynote extends AVElement{
             this.retractStickynote(event);
         });
         this.generateColorForSticker();
-        this.generateContentForSticker();
         this.generateRotationForSticker();
         this.loadNewChildrenComponent('comp-stickynote-options');
     }
@@ -35,11 +34,6 @@ export default class Stickynote extends AVElement{
     generateColorForSticker() {
         let stickerBody = this.body.querySelector('div');
         stickerBody.style['background-color'] = this.attributes['background-color'].nodeValue;
-    }
-
-    generateContentForSticker() {
-        this.body.querySelector('input').value = this.attributes['stickynote-title'].nodeValue;
-        this.body.querySelector('article').innerHTML = this.attributes['textvalue'].nodeValue;
     }
 
     generateRotationForSticker() {

@@ -45,7 +45,7 @@
         --interface-background: #353535;
         --terciary-color : #adadad; 
         --opaque-backgorund : #00000069;
-        --transparent-backgorund : #00000049;
+        --transparent-backgorund : #0000001C;
         --button-background : #403e3ecc;
         --button-background-hover : #656565d1;
         --window-header-background : linear-gradient(#555,#333);
@@ -96,7 +96,7 @@
     --interface-background: #353535;
     --terciary-color : #adadad; 
     --opaque-backgorund : #00000069;
-    --transparent-backgorund : #00000049;
+    --transparent-backgorund : #0000001C;
     --button-background : #403e3ecc;
     --button-background-hover : #656565d1;
     --window-header-background : linear-gradient(#555,#333);

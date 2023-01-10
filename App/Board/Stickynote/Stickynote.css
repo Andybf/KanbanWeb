@@ -23,12 +23,12 @@
 .stickynote-content-expanded {
     z-index: 301;
     box-shadow: 0 0 6px 4px var(--global-shadow);
-    width: 66.66%;
-    height: 66.66%;
-    left: calc(66.66% - 50%);
-    top: calc(66.66% - 50%);
+    width: 75%;
+    height: 80%;
     flex-direction: column;
     position: absolute;
+    left: 12.5%;
+    top: 10%;
     cursor: initial;
     transform: none !important;
 }
@@ -53,7 +53,7 @@ span {
 }
 
 input[type="text"]::placeholder {
-    color: var(--global-font-color);
+    color: #444444;
     filter: opacity(0.50);
 }
 input[type="text"] {
@@ -63,7 +63,7 @@ input[type="text"] {
     padding: 5px 1rem;
     width: -webkit-fill-available;
     background: var(--transparent-backgorund);
-    color: var(--global-font-color);
+    color: #444444;
     font-size: 18pt;
 }
 
@@ -74,8 +74,9 @@ article {
     resize: none;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
-    padding: 2rem;
+    padding: 1rem;
     outline: none;
+    text-align: start;
 } 
 
 .dark-background {
