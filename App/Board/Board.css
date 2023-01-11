@@ -63,7 +63,7 @@ button.column-header-button {
     width: 28px;
     border: 1px solid var(--global-font-color);
     filter: contrast(0);
-    background: url(/FreeWebKanban/images/recyclebin.svg);
+    background: url(/KanbanWeb/images/recyclebin.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 75%;
@@ -85,7 +85,7 @@ li.sticker-item {
 
 .slot {
     border: dashed 3px var(--terciary-color) !important;
-    background-image: url('/FreeWebKanban/images/addSticker.svg');
+    background-image: url('/KanbanWeb/images/addSticker.svg');
     background-position: center;
     background-repeat: no-repeat;
 }

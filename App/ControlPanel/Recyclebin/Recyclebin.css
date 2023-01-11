@@ -10,7 +10,7 @@ section#recyclebin-container {
     display: none;
     pointer-events: all;
 
-    background: url(/FreeWebKanban/images/recyclebin.svg);
+    background: url(/KanbanWeb/images/recyclebin.svg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: 50%;

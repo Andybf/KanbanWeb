@@ -1,4 +1,4 @@
-import AVElement from '/FreeWebKanban/modules/AVElement.js'
+import AVElement from '/KanbanWeb/modules/AVElement.js'
 
 export default class Menu extends AVElement {
 
@@ -13,22 +13,22 @@ export default class Menu extends AVElement {
             (event) => {this.toggleListContainer(event)}
         );
 
-        import('/FreeWebKanban/App/Menu/LoadBoard.js').then( ( appClassDefinition) => {
+        import('/KanbanWeb/App/Menu/LoadBoard.js').then( ( appClassDefinition) => {
             customElements.define("mod-load-board", appClassDefinition.default);
         });
-        import('/FreeWebKanban/App/Menu/QuickSave.js').then( ( appClassDefinition) => {
+        import('/KanbanWeb/App/Menu/QuickSave.js').then( ( appClassDefinition) => {
             customElements.define("mod-browser-save", appClassDefinition.default);
         });
-        import('/FreeWebKanban/App/Menu/ExportBoard.js').then( ( appClassDefinition) => {
+        import('/KanbanWeb/App/Menu/ExportBoard.js').then( ( appClassDefinition) => {
             customElements.define("mod-export-board", appClassDefinition.default);
         });
-        import('/FreeWebKanban/App/Menu/ChangeTheme.js').then( ( appClassDefinition) => {
+        import('/KanbanWeb/App/Menu/ChangeTheme.js').then( ( appClassDefinition) => {
             customElements.define("mod-change-theme", appClassDefinition.default);
         });
-        import('/FreeWebKanban/App/Menu/AutoSave.js').then( ( appClassDefinition) => {
+        import('/KanbanWeb/App/Menu/AutoSave.js').then( ( appClassDefinition) => {
             customElements.define("mod-auto-save", appClassDefinition.default);
         });
-        import('/FreeWebKanban/App/Menu/ReloadCache.js').then( ( appClassDefinition) => {
+        import('/KanbanWeb/App/Menu/ReloadCache.js').then( ( appClassDefinition) => {
             customElements.define("mod-reload-cache", appClassDefinition.default);
         });
     }

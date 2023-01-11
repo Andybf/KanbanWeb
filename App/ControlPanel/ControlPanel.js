@@ -1,8 +1,8 @@
 /**
- * FreeWebKanban © 2022 Anderson Bucchianico. All rights reserved.
+ * KanbanWeb © 2022 Anderson Bucchianico. All rights reserved.
 */
 
-import AVElement from '/FreeWebKanban/modules/AVElement.js'
+import AVElement from '/KanbanWeb/modules/AVElement.js'
 export default class ControlPanel extends AVElement {
 
     stickerStack;

@@ -1,4 +1,4 @@
-import AVElement from '/FreeWebKanban/modules/AVElement.js'
+import AVElement from '/KanbanWeb/modules/AVElement.js'
 export default class StickynoteOptions extends AVElement {
 
     selectionlistBackground = {};

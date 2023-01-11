@@ -1,4 +1,4 @@
-import BrowserSave from "/FreeWebKanban/modules/BrowserSave.js";
+import BrowserSave from "/KanbanWeb/modules/BrowserSave.js";
 
 export default class RealoadCache extends HTMLElement {
 

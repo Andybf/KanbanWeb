@@ -1,5 +1,5 @@
-const cacheName = 'FreeWebKanbanPWA';
-const pathname = '/FreeWebKanban';
+const cacheName = 'KanbanWebPWA';
+const pathname = '/KanbanWeb';
 const filesToCache = [
     pathname+'/',
     pathname+'/sw.js',

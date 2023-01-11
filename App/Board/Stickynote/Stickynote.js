@@ -1,9 +1,9 @@
 /**
- * FreeWebKanban © 2022 Anderson Bucchianico. All rights reserved.
+ * KanbanWeb © 2022 Anderson Bucchianico. All rights reserved.
 */
 
-import AVElement from "/FreeWebKanban/modules/AVElement.js";
-import BrowserSave from "/FreeWebKanban/modules/BrowserSave.js";
+import AVElement from "/KanbanWeb/modules/AVElement.js";
+import BrowserSave from "/KanbanWeb/modules/BrowserSave.js";
 
 export default class Stickynote extends AVElement{
 

@@ -1,5 +1,5 @@
-import AVElement from '/FreeWebKanban/modules/AVElement.js';
-import BrowserSave from "/FreeWebKanban/modules/BrowserSave.js";
+import AVElement from '/KanbanWeb/modules/AVElement.js';
+import BrowserSave from "/KanbanWeb/modules/BrowserSave.js";
 
 export default class App extends AVElement {
     
