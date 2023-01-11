@@ -1,6 +1,6 @@
 /* 
  * AndView Framework
- * Copyright © 2022 Anderson Bucchianico. All rights reserved.
+ * Copyright © 2023 Anderson Bucchianico. All rights reserved.
  * 
 */
 
@@ -80,6 +80,7 @@ export default class AVElement extends HTMLElement {
         await this.#fetchContentWithPath(this.#componentpath.html).then( (responseText) => {
             let componentHTML = new DOMParser().parseFromString(responseText,"text/html");
             this.body = this.attachShadow({mode:'closed'});
+            this.style.visibility = 'hidden';
             Array.from(componentHTML.querySelector("body").childNodes).forEach( node => {
                 this.body.appendChild(node);
             })
@@ -110,6 +111,11 @@ export default class AVElement extends HTMLElement {
     #doPostLoadContentActions() {
         this.#catalogChildrenComponents();
         this.#initializeAllPreDefinedChildrenComponents();
+        if (this.localization) {
+            let language = document.querySelector('html').lang;
+            AVutils.translateComponentText(this.localization, this, language);
+        }
+        this.style.visibility = null;
     }
 
     #catalogChildrenComponents() {
@@ -122,11 +128,11 @@ export default class AVElement extends HTMLElement {
 
     #initializeAllPreDefinedChildrenComponents() {
         this.#childrenComponentList.forEach( componentElement => {
-            this.#importChildrenComponentDefinition(componentElement);
+            this.importComponentDefinition(componentElement);
         })
     }
 
-    #importChildrenComponentDefinition(componentElement) {
+    importComponentDefinition(componentElement) {
         let className = this.#constructComponentClassName(componentElement);
         import(`${this.#componentpath.root}/${className}/${className}.js`)
         .then( classDefinition => {
@@ -134,12 +140,12 @@ export default class AVElement extends HTMLElement {
         });
     }
 
-    #defineCustomComponent(htmlNode,classDefinition) {
-        function isComponentAlreadyDefined(name) {
-            return window.customElements.get(name);
+    #defineCustomComponent(htmlNode, classDefinition) {
+        function isComponentNotDefined(classDefinition, node) {
+            return classDefinition.default && !window.customElements.get(node.localName);
         }
-        if (classDefinition.default && !isComponentAlreadyDefined(htmlNode.localName)) {
-            customElements.define(htmlNode.localName,classDefinition.default);
+        if (isComponentNotDefined(classDefinition, htmlNode)) {
+            customElements.define(htmlNode.localName, classDefinition.default);
         }
     }
 
@@ -152,14 +158,16 @@ export default class AVElement extends HTMLElement {
     }
 
     loadNewChildrenComponent(childTagName) {
-        let newComp = document.createElement(childTagName)
-        let className = this.#constructComponentClassName(newComp);
-        import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
-            let parentMap = new Map([[this.localName, {localName: this.localName} ]]);
-            AVutils.concatMaps(parentMap, this._parentComponentsMap);
-            classDefinition.default.prototype._parentComponentsMap = parentMap;
-            this.#defineCustomComponent(newComp,classDefinition);
-        });
+        if(window.customElements.get(childTagName) == undefined) {
+            let newComp = document.createElement(childTagName)
+            let className = this.#constructComponentClassName(newComp);
+            import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
+                let parentMap = new Map([[this.localName, {localName: this.localName} ]]);
+                AVutils.concatMaps(parentMap, this._parentComponentsMap);
+                classDefinition.default.prototype._parentComponentsMap = parentMap;
+                this.#defineCustomComponent(newComp,classDefinition);
+            });
+        }
     }
 
     getParentComponent(localName) {
@@ -174,6 +182,14 @@ export default class AVElement extends HTMLElement {
             localName = `comp-${localName}`;
         }
         return this.#childrenComponentList.get(localName);
+    }
+
+    getAllChildrenComponents() {
+        return this.#childrenComponentList.values();
+    }
+
+    getComponentRoot() {
+        return this.#componentpath.root;
     }
 
     renderedCallback(){}
