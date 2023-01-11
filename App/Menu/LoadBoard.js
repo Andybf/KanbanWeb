@@ -1,7 +1,3 @@
-/**
- * FreeWebKanban © 2022 Anderson Bucchianico. All rights reserved.
-*/
-
 export default class LoadBoard extends HTMLElement {
 
     loadButton;

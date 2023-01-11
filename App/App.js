@@ -1,7 +1,3 @@
-/**
- * FreeWebKanban © 2022 Anderson Bucchianico. All rights reserved.
-*/
-
 import AVElement from '/FreeWebKanban/modules/AVElement.js';
 import BrowserSave from "/FreeWebKanban/modules/BrowserSave.js";
 

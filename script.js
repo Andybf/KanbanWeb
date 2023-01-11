@@ -1,8 +1,3 @@
-/**
- * FreeWebKanban
- * FreeWebKanban © 2021 Anderson Bucchianico. All rights reserved.
-*/
-
 function initializeServiceWorker() {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./sw.js").then( (registration) => {
@@ -20,4 +15,4 @@ function initializeAVframework() {
 }
 
 initializeAVframework();
-//initializeServiceWorker();
+initializeServiceWorker();

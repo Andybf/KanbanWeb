@@ -28,6 +28,9 @@ export default class Menu extends AVElement {
         import('/FreeWebKanban/App/Menu/AutoSave.js').then( ( appClassDefinition) => {
             customElements.define("mod-auto-save", appClassDefinition.default);
         });
+        import('/FreeWebKanban/App/Menu/ReloadCache.js').then( ( appClassDefinition) => {
+            customElements.define("mod-reload-cache", appClassDefinition.default);
+        });
     }
 
     toggleListContainer(event) {
