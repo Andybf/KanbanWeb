@@ -106,5 +106,6 @@ export default class StickynoteOptions extends AVElement {
 
     destroyMenu(menu) {
         menu.parentElement.removeChild(menu);
+        menu = null;
     }
 }
