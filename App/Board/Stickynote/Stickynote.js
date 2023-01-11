@@ -28,13 +28,24 @@ export default class Stickynote extends AVElement{
             this.retractStickynote(event);
         });
         this.generateColorForSticker();
+        this.generateContentForSticker();
         this.generateRotationForSticker();
         this.loadNewChildrenComponent('comp-stickynote-options');
+        this.updateStickynotePreview();
     }
 
     generateColorForSticker() {
         let stickerBody = this.body.querySelector('div');
         stickerBody.style['background-color'] = this.attributes['background-color'].nodeValue;
+    }
+
+    generateContentForSticker() {
+        if (this.attributes['stickynote-title']) {
+            this.body.querySelector('input').value = this.attributes['stickynote-title'].nodeValue;
+        }
+        if (this.attributes['textvalue']) {
+            this.body.querySelector('article').innerHTML = this.attributes['textvalue'].nodeValue;
+        }
     }
 
     generateRotationForSticker() {
@@ -98,7 +109,7 @@ export default class Stickynote extends AVElement{
     }
 
     retractStickynote() {
-        this.stickynote.querySelector('span').innerText = this.stickynote.querySelector("input").value;
+        this.updateStickynotePreview();
         this.stickynote.classList.remove('stickynote-content-expanded');
         this.stickynote.style['transform'] = this.stickynoteRotation;
         this.stickynote.style['position'] = 'absolute';
@@ -121,5 +132,9 @@ export default class Stickynote extends AVElement{
         if (event.key == 'Escape') {
             this.retractStickynote();
         }
+    }
+
+    updateStickynotePreview() {
+        this.stickynote.querySelector('span').innerText = this.stickynote.querySelector("input").value;
     }
 }

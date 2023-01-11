@@ -27,7 +27,6 @@ export default class Board extends AVElement {
         } else {
             this.createNewStickernoteOnColumnList(event.target.parentElement);
         }
-        BrowserSave.checkAutoSave();
     }
 
     createNewStickernoteOnColumnList(target) {
@@ -48,7 +47,6 @@ export default class Board extends AVElement {
             stickerSlot.ondrop = event => {this.dropOnStickynoteSlot(event)};
             column.querySelector("ul").appendChild(stickerSlot);
         }
-        BrowserSave.checkAutoSave();
     }
 
     insertNewColumnSlotOnBoard() {
