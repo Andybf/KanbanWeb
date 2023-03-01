@@ -10,27 +10,25 @@ ul {
 ul.column-list {
     display: flex;
     min-height: 512px;
+    max-height: calc(100vh - 82px); /*50px from header + 2rem's of vertical padding*/
+    padding: 1rem 3%;
 }
 
 li.column-item {
-    min-width: 190px;
+    min-width: 242px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    row-gap: 20px;
-    padding: 0;
+    align-items: center;
+    row-gap: 10px;
     border-right: 2px solid #9a9a9a;
-    margin: 0 0 0 25px;
-    padding-right: 25px;
 }
 
 li.column-item:last-child {
     border: none;
-    
 }
-li.column-item:first-child {
-    margin: 0;
-    padding-right: 25px;    
+li.column-item.slot:last-child {
+    margin-left: 25px;
 }
 
 div.column-header {
@@ -39,6 +37,7 @@ div.column-header {
     border-bottom: 2px solid #9a9a9a;
     padding-bottom: 5px;
     max-height: 32px;
+    width: 85%;
     column-gap: 5px;
 }
 
@@ -54,7 +53,7 @@ input.column-title {
     display: flex;
     border: none;
     height: 30px;
-    width: 155px;
+    width: auto;
 }
 
 button.column-header-button {
@@ -76,7 +75,14 @@ ul.sticker-list {
     border: none;
     display: flex;
     flex-direction: column;
-    row-gap: 2rem;
+    row-gap: 28px;
+    padding: 10px 25px 10rem 25px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+ul.sticker-list::-webkit-scrollbar {
+    background: transparent;
+    width: 0px;
 }
 
 li.sticker-item {

@@ -45,7 +45,9 @@ export default class Board extends AVElement {
             stickerSlot.className = "sticker-item slot";
             stickerSlot.ondragover = event => {event.preventDefault()};
             stickerSlot.ondrop = event => {this.dropOnStickynoteSlot(event)};
-            column.querySelector("ul").appendChild(stickerSlot);
+            const columnList = column.querySelector("ul");
+            columnList.appendChild(stickerSlot);
+            columnList.scrollTo({top: columnList.getBoundingClientRect().height, behavior: 'smooth'});
         }
     }
 
@@ -72,6 +74,7 @@ export default class Board extends AVElement {
                     itemslot.parentElement.removeChild(itemslot);
                 }
             }
+            columns.querySelector("ul").scrollTo({top: 0, behavior: 'smooth'});
         }
     }
 
