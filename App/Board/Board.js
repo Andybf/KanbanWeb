@@ -108,10 +108,12 @@ export default class Board extends AVElement {
     }
 
     deleteColumn(event) {
-        event.target.parentElement.parentElement.parentElement.removeChild(
-            event.target.parentElement.parentElement
-        );
-        BrowserSave.checkAutoSave();
+        if (confirm("Delete this column? All data will be lost!")) {
+            event.target.parentElement.parentElement.parentElement.removeChild(
+                event.target.parentElement.parentElement
+            );
+            BrowserSave.checkAutoSave();
+        }
     }
 
     calculateEventTouchHitbox(event, item) {
