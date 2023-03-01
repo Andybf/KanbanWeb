@@ -15,7 +15,7 @@ export default class AVutils {
     static concatMaps(map1, map2) {
         const iterationCount = (map1.size > map2.size) ? map1.size : map2.size;
         for (let index=0; index<iterationCount; index++) {
-            map1.set(Array.from(map2)[index][0], {localName : Array.from(map2)[index][1].localName});
+            map1.set(Array.from(map2)[index][0], Array.from(map2)[index][1]);
         }
     }
 }

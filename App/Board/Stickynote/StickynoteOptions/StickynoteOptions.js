@@ -87,7 +87,8 @@ export default class StickynoteOptions extends AVElement {
         document.execCommand(value,false, arg);
     }
 
-    openMenuSelection(event){
+    openMenuSelection(event) {
+        this.retraceParents('comp-list-selector');
         let menu = document.createElement('comp-list-selector');
         menu.sourceItems = this[event.target.dataset.listsource];
         menu.selectionType = event.target.dataset.type;

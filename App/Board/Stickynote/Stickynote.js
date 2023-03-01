@@ -104,6 +104,7 @@ export default class Stickynote extends AVElement{
         this.ondragstart = null;
         this.ondragend = null;
         this.stickynote.onmouseup = null;
+        this.retraceParents('comp-stickynote-options');
         this.stickynote.prepend(document.createElement('comp-stickynote-options'));
         window.onkeydown = event => {this.handleWindowKeyPress(event)};
     }

@@ -157,16 +157,22 @@ export default class AVElement extends HTMLElement {
         }
     }
 
-    loadNewChildrenComponent(childTagName) {
-        if(window.customElements.get(childTagName) == undefined) {
-            let newComp = document.createElement(childTagName)
+    retraceParents(childTagName) {
+        let classDefinition = customElements.get(childTagName);
+        let parentMap = new Map([[this.localName, this ]]);
+        AVutils.concatMaps(parentMap, this._parentComponentsMap);
+        classDefinition.prototype._parentComponentsMap = parentMap;
+    }
+
+    async loadNewChildrenComponent(childTagName) {
+        if (window.customElements.get(childTagName) == undefined) {
+            let newComp = document.createElement(childTagName);
             let className = this.#constructComponentClassName(newComp);
-            import(`${this.#componentpath.root}/${className}/${className}.js`).then( classDefinition => {
-                let parentMap = new Map([[this.localName, {localName: this.localName} ]]);
-                AVutils.concatMaps(parentMap, this._parentComponentsMap);
-                classDefinition.default.prototype._parentComponentsMap = parentMap;
-                this.#defineCustomComponent(newComp,classDefinition);
-            });
+            let classDefinition = await import(`${this.#componentpath.root}/${className}/${className}.js`);
+            let parentMap = new Map([[this.localName, this ]]);
+            AVutils.concatMaps(parentMap, this._parentComponentsMap);
+            classDefinition.default.prototype._parentComponentsMap = parentMap;
+            this.#defineCustomComponent(newComp,classDefinition);
         }
     }
 
