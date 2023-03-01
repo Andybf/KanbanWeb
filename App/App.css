@@ -10,8 +10,9 @@ header {
     background: var(--interface-background);
     color: var(--global-font-color);
     height: 30px;
-    padding: 10px 20px;
+    padding: 5px 20px;
     box-shadow: 0 2px 4px 0px var(--global-shadow);
+    align-items: center;
 }
 .header-node {
     display: flex;
@@ -27,7 +28,7 @@ h1 {
     display: flex;
     align-items: center;
     font-weight: normal;
-    font-size: 16pt;
+    font-size: 14pt;
     user-select: none;
 }
 

@@ -18,11 +18,13 @@ export default class RealoadCache extends HTMLElement {
     }
 
     deleteBrowserCache() {
-        window.caches.keys().then( cacheKeys => {
-            cacheKeys.map( key => {
-                window.caches.delete(key);
-            });
-        })
-        window.location = window.location;
+        if (confirm("Reload cache? It will require a working connection with the internet")) {
+            window.caches.keys().then( cacheKeys => {
+                cacheKeys.map( key => {
+                    window.caches.delete(key);
+                });
+            })
+            window.location = window.location;
+        }
     }
 }

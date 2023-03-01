@@ -15,7 +15,7 @@ ul.column-list {
 }
 
 li.column-item {
-    min-width: 242px;
+    min-width: 227px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
@@ -76,7 +76,7 @@ ul.sticker-list {
     border: none;
     display: flex;
     flex-direction: column;
-    row-gap: 18px;
+    row-gap: 8px;
     padding: 10px 25px 10rem 25px;
     overflow-y: scroll;
     overflow-x: hidden;
