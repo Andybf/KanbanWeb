@@ -1,7 +1,7 @@
 .stickynote-content {
     box-shadow: -3px 4px 5px 2px var(--global-shadow);
     width: 190px;
-    height: 130px;
+    height: 120px;
     font-size: 20px;
     z-index: 100;
     transition: 0.33s;

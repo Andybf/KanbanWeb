@@ -76,7 +76,7 @@ ul.sticker-list {
     border: none;
     display: flex;
     flex-direction: column;
-    row-gap: 28px;
+    row-gap: 18px;
     padding: 10px 25px 10rem 25px;
     overflow-y: scroll;
     overflow-x: hidden;
