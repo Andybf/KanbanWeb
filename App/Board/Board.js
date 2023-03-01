@@ -47,7 +47,7 @@ export default class Board extends AVElement {
             stickerSlot.ondrop = event => {this.dropOnStickynoteSlot(event)};
             const columnList = column.querySelector("ul");
             columnList.appendChild(stickerSlot);
-            columnList.scrollTo({top: columnList.getBoundingClientRect().height, behavior: 'smooth'});
+            columnList.scrollTo({top: columnList.scrollHeight, behavior: 'smooth'});
         }
     }
 

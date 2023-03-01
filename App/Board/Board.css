@@ -53,7 +53,7 @@ input.column-title {
     display: flex;
     border: none;
     height: 30px;
-    width: auto;
+    width: inherit;
 }
 
 button.column-header-button {
@@ -72,6 +72,7 @@ button.column-header-button {
 
 ul.sticker-list {
     height: -webkit-fill-available;
+    width: -webkit-fill-available;
     border: none;
     display: flex;
     flex-direction: column;
