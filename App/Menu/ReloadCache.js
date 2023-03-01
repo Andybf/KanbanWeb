@@ -8,7 +8,7 @@ export default class RealoadCache extends HTMLElement {
         `<button
             class='button-option'
             id="reload-cache"
-        >Reaload Cache</button>`;
+        >Reload Cache</button>`;
     }
 
     connectedCallback() {
