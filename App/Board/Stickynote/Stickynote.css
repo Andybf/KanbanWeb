@@ -2,7 +2,7 @@
     box-shadow: -3px 4px 5px 2px var(--global-shadow);
     width: 175px;
     height: 110px;
-    font-size: 14pt;
+    font-size: 13pt;
     z-index: 10002;
     transition: 0.33s;
     display: flex;

@@ -10,12 +10,12 @@ ul {
 ul.column-list {
     display: flex;
     min-height: 512px;
-    max-height: calc(100vh - 82px); /*50px from header + 2rem's of vertical padding*/
-    padding: 1rem 3%;
+    max-height: calc(100vh - 56px); /*50px from header + 1rem's of vertical padding*/
+    padding: 1rem 3% 0 1rem;
 }
 
 li.column-item {
-    min-width: 227px;
+    min-width: 228px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
@@ -56,7 +56,7 @@ input.column-title {
     width: inherit;
 }
 
-button.column-header-button {
+.column-header-button {
     display: none;
     height: 28px;
     width: 28px;
@@ -87,7 +87,7 @@ ul.sticker-list::-webkit-scrollbar {
 }
 
 li.sticker-item {
-    min-height: 130px;
+    min-height: 125px;
 }
 
 .slot {

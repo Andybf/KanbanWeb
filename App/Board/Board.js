@@ -80,12 +80,10 @@ export default class Board extends AVElement {
 
     convertColumnSlotToColumn(column) {
         let listItem = document.importNode(this.body.querySelector("template#column-content").content,true);
-        listItem.querySelector("#recycle-button").addEventListener('click', event => {this.deleteColumn(event)});
+        listItem.querySelector(".column-header-button").onclick = event => {this.deleteColumn(event)};
         column.appendChild(listItem);
         this.deactivateStickerSlot(column);
-        column.querySelector("input[class='column-title']").addEventListener("change", 
-            (event) => {BrowserSave.checkAutoSave(event);}
-        );     
+        column.querySelector("input[class='column-title']").onchange = (event) => {BrowserSave.checkAutoSave(event);};     
     }
 
     columnDrop(event) {
