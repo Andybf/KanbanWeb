@@ -13,8 +13,8 @@ export default class Menu extends AVElement {
             (event) => {this.toggleListContainer(event)}
         );
 
-        import('/KanbanWeb/App/Menu/LoadBoard.js').then( ( appClassDefinition) => {
-            customElements.define("mod-load-board", appClassDefinition.default);
+        import('/KanbanWeb/App/Menu/ImportBoard.js').then( ( appClassDefinition) => {
+            customElements.define("mod-import-board", appClassDefinition.default);
         });
         import('/KanbanWeb/App/Menu/QuickSave.js').then( ( appClassDefinition) => {
             customElements.define("mod-browser-save", appClassDefinition.default);

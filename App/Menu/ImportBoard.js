@@ -1,4 +1,4 @@
-export default class LoadBoard extends HTMLElement {
+export default class ImportBoard extends HTMLElement {
 
     loadButton;
     loadInput;
@@ -8,15 +8,15 @@ export default class LoadBoard extends HTMLElement {
         this.innerHTML = `
             <button
                 class="button-option"
-                id="load-board"
-            >Load Board</button>
+                id="import-board"
+            >Import Board</button>
             <input type="file"/>
         `;
     }
 
     connectedCallback() {
         this.compAppReference = window.document.querySelector("comp-app");
-        this.loadButton = this.querySelector('button[id="load-board"]');
+        this.loadButton = this.querySelector('button[id="import-board"]');
         this.loadInput = this.querySelector('input[type="file"]');
         
         this.loadButton.onclick = () => {
