@@ -1,3 +1,5 @@
+import ChangeBackground from "/KanbanWeb/App/Menu/ChangeBackground.js";
+
 export default class ImportBoard extends HTMLElement {
 
     loadButton;
@@ -52,6 +54,7 @@ export default class ImportBoard extends HTMLElement {
 
     loadFromJson(json) {
         this.setBoardTitle(json.name);
+        ChangeBackground.loadBackground(json.background);
         this.cleanBoardContent();
         this.setBoardStickers(json.columns);
     }

@@ -10,14 +10,19 @@ export default class BrowserSave {
         if (window.localStorage) {
             const content = BrowserSave.generateBoardDataJson(window.document.querySelector("comp-app"));
             window.localStorage.lastSave = JSON.stringify(content,null,4);
+        } else {
+            alert("Your browser does not support local storage feature. Please update your current browser.");
         }
     }
 
     static generateBoardDataJson(rootAppComp) {
         let BoardNameInput = rootAppComp.body.querySelector("input");
         let BoardName = (BoardNameInput.value.length > 0) ? BoardNameInput.value : BoardNameInput.placeholder;
+        let background =  document.firstElementChild.style.backgroundImage;
+        background = background.substring(4, background.length-1);
         let content = {
             'name' : BoardName,
+            'background' : background,
             'createdDate' : Date.now(),
             'columns' : []
         }

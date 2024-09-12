@@ -22,6 +22,9 @@ export default class Menu extends AVElement {
         import('/KanbanWeb/App/Menu/ExportBoard.js').then( ( appClassDefinition) => {
             customElements.define("mod-export-board", appClassDefinition.default);
         });
+        import('/KanbanWeb/App/Menu/ChangeBackground.js').then( ( appClassDefinition) => {
+            customElements.define("mod-change-background", appClassDefinition.default);
+        });
         import('/KanbanWeb/App/Menu/ChangeTheme.js').then( ( appClassDefinition) => {
             customElements.define("mod-change-theme", appClassDefinition.default);
         });
